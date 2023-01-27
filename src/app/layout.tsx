@@ -12,7 +12,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
             <head />
             <body className={inter.className}>
                 <Providers>
-                    <main className="max-w-2xl mx-auto p-8">
+                    <main className="max-w-4xl mx-auto p-8">
                         {children}
                     </main>
                 </Providers>
