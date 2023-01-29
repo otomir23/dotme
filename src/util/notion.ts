@@ -16,6 +16,10 @@ export type Icon = PageObjectResponse["icon"];
 export type Property = PageObjectResponse["properties"][keyof PageObjectResponse["properties"]];
 export type PropertyType = Property["type"];
 export type SelectColor = "default" | "gray" | "brown" | "orange" | "yellow" | "green" | "blue" | "purple" | "pink" | "red";
+export type SelectOption = {
+    name: string;
+    color: SelectColor;
+}
 
 
 export async function getDatabasePages<T extends Record<string, PropertyType>>(id: string, schema: T) {

@@ -19,7 +19,7 @@ import Image from "next/image";
 import avatar from "@/../public/avatar.jpg";
 import React, {Fragment} from "react";
 import Link from "next/link";
-import {getProjects, getSocials} from "@/util/data";
+import {getBlogPosts, getProjects, getSocials} from "@/util/data";
 
 export default async function Home() {
     const nav = [
@@ -31,6 +31,7 @@ export default async function Home() {
 
     const socials = await getSocials();
     const projects = await getProjects();
+    const blog = await getBlogPosts();
 
     return (
         <>
@@ -151,6 +152,43 @@ export default async function Home() {
                                         {tag.name}
                                     </span>
                                 ))}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </section>
+            <section id="blog" className="mt-8 sm:mt-16">
+                <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                    <BigPencilIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
+                    Blog
+                </h2>
+                <div className="flex flex-col gap-4 mt-4 sm:mt-8">
+                    {blog.map((post) => (
+                        <Link
+                            href={`/blog/${post.slug}`} key={post.slug}
+                            className="flex flex-col gap-3 rounded-md border border-neutral-200 dark:border-neutral-800"
+                        >
+                            {post.image && <Image src={post.image} alt={post.title} width={1280} height={720}
+                                    className="rounded-t-md aspect-video object-cover w-full h-48"
+                            />}
+                            <div className="flex flex-col gap-2 p-6">
+                                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+                                    {post.title}
+                                </h3>
+                                <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
+                                    meow
+                                </p>
+                                <div className="flex flex-row gap-2">
+                                    {post.tags.map((tag) => (
+                                        <span
+                                            className="text-xs sm:text-sm px-2 py-1 rounded-md bg-neutral-100
+                                            dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
+                                            key={tag.name}
+                                        >
+                                            {tag.name}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </Link>
                     ))}

@@ -1,4 +1,5 @@
-import {getDatabasePages, Icon, SelectColor} from "@/util/notion";
+import {getDatabasePages, Icon, SelectOption} from "@/util/notion";
+import {PageObjectResponse} from "@notionhq/client/build/src/api-endpoints";
 
 export type Social = {
     name: string;
@@ -27,10 +28,7 @@ export type Project = {
     description: string;
     link: string;
     icon: Icon;
-    tags: {
-        name: string;
-        color: SelectColor;
-    }[]
+    tags: SelectOption[];
 }
 
 export async function getProjects(): Promise<Project[]> {
@@ -49,6 +47,35 @@ export async function getProjects(): Promise<Project[]> {
         description: p.properties.Description.rich_text[0].plain_text || "There's no description for this project, but I'm sure it's great!",
         link: p.properties.URL.url || "about:blank",
         icon: p.icon,
+        tags: p.properties.Tags.multi_select.map(t => ({
+            name: t.name,
+            color: t.color
+        }))
+    }));
+}
+
+export type BlogPost = {
+    title: string;
+    content: PageObjectResponse;
+    image?: string;
+    tags: SelectOption[];
+    slug: string;
+}
+
+export async function getBlogPosts(): Promise<BlogPost[]> {
+    const data = await getDatabasePages(
+        process.env.NOTION_BLOG_DATABASE_ID || "",
+        {
+            "Name": "title",
+            "Tags": "multi_select"
+        }
+    );
+
+    return data.map(p => ({
+        title: p.properties.Name.title[0].plain_text || "Untitled post",
+        content: p,
+        image: p.cover ? p.cover.type === "external" ? p.cover.external.url : p.cover.type === "file" ? p.cover.file.url : undefined : undefined,
+        slug: p.id,
         tags: p.properties.Tags.multi_select.map(t => ({
             name: t.name,
             color: t.color
