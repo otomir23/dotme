@@ -19,17 +19,18 @@ import Image from "next/image";
 import avatar from "@/../public/avatar.jpg";
 import React, {Fragment} from "react";
 import Link from "next/link";
-import {getSocials} from "@/util/data";
+import {getProjects, getSocials} from "@/util/data";
 
 export default async function Home() {
     const nav = [
         {name: "Socials", href: "#socials", icon: LinkIcon},
         {name: "Technologies", href: "#stack", icon: WrenchScrewdriverIcon},
-        {name: "Projects", href: "#projects", icon: BriefcaseIcon},
+        {name: "Portfolio", href: "#projects", icon: BriefcaseIcon},
         {name: "Blog", href: "#blog", icon: PencilIcon},
     ]
 
     const socials = await getSocials();
+    const projects = await getProjects();
 
     return (
         <>
@@ -116,6 +117,41 @@ export default async function Home() {
                                     <LinkIcon className="w-5 h-5"/>
                                 : <LinkIcon className="w-5 h-5"/>
                             }
+                        </Link>
+                    ))}
+                </div>
+            </section>
+            <section id="projects" className="mt-8 sm:mt-16">
+                <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                    <BigBriefcaseIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
+                    Portfolio
+                </h2>
+                <div className="flex flex-col gap-4 mt-4 sm:mt-8">
+                    {projects.map((project) => (
+                        <Link
+                            href={project.link} key={project.name}
+                            className="flex flex-col gap-3 rounded-md border p-6
+                            border-neutral-200 dark:border-neutral-800"
+                            target="_blank"
+                            title={project.name}
+                        >
+                            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+                                {project.name}
+                            </h3>
+                            <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
+                                {project.description}
+                            </p>
+                            <div className="flex flex-row gap-2">
+                                {project.tags.map((tag) => (
+                                    <span
+                                        className="text-xs sm:text-sm px-2 py-1 rounded-md bg-neutral-100
+                                        dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
+                                        key={tag.name}
+                                    >
+                                        {tag.name}
+                                    </span>
+                                ))}
+                            </div>
                         </Link>
                     ))}
                 </div>
