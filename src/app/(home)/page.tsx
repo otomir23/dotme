@@ -91,7 +91,7 @@ export default async function Home() {
                     <BigLinkIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Socials
                 </h2>
-                <div className="flex flex-row gap-4 mt-4 sm:mt-8">
+                <div className="flex flex-row gap-4 mt-4 sm:mt-8 flex-wrap">
                     {socials.map((social) => (
                         <Link
                             href={social.link} key={social.name}
