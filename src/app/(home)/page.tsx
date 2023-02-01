@@ -142,7 +142,7 @@ export default async function Home() {
                             <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
                                 {project.description}
                             </p>
-                            <div className="flex flex-row gap-2">
+                            <div className="flex flex-row gap-2 flex-wrap">
                                 {project.tags.map((tag) => (
                                     <span
                                         className="text-xs sm:text-sm px-2 py-1 rounded-md bg-neutral-100
@@ -178,7 +178,7 @@ export default async function Home() {
                                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
                                     meow
                                 </p>
-                                <div className="flex flex-row gap-2">
+                                <div className="flex flex-row gap-2 flex-wrap">
                                     {post.tags.map((tag) => (
                                         <span
                                             className="text-xs sm:text-sm px-2 py-1 rounded-md bg-neutral-100
