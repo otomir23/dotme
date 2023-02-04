@@ -32,6 +32,7 @@ export default async function Home() {
     const socials = await getSocials();
     const projects = await getProjects();
     const blog = await getBlogPosts();
+    const timeFormatter = new Intl.RelativeTimeFormat("en-us");
 
     return (
         <>
@@ -176,7 +177,12 @@ export default async function Home() {
                                     {post.title}
                                 </h3>
                                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
-                                    meow
+                                    {
+                                        timeFormatter.format(
+                                            -post.daysAgo,
+                                            "days"
+                                        )
+                                    }
                                 </p>
                                 <div className="flex flex-row gap-2 flex-wrap">
                                     {post.tags.map((tag) => (

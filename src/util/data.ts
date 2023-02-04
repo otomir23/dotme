@@ -1,5 +1,4 @@
 import {getDatabasePages, Icon, SelectOption} from "@/util/notion";
-import {PageObjectResponse} from "@notionhq/client/build/src/api-endpoints";
 
 export type Social = {
     name: string;
@@ -56,10 +55,10 @@ export async function getProjects(): Promise<Project[]> {
 
 export type BlogPost = {
     title: string;
-    content: PageObjectResponse;
     image?: string;
     tags: SelectOption[];
     slug: string;
+    daysAgo: number;
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
@@ -67,18 +66,34 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         process.env.NOTION_BLOG_DATABASE_ID || "",
         {
             "Name": "title",
-            "Tags": "multi_select"
+            "Tags": "multi_select",
+            "Slug": "rich_text"
         }
     );
 
     return data.map(p => ({
         title: p.properties.Name.title[0].plain_text || "Untitled post",
-        content: p,
         image: p.cover ? p.cover.type === "external" ? p.cover.external.url : p.cover.type === "file" ? p.cover.file.url : undefined : undefined,
-        slug: p.id,
+        slug: p.properties.Slug.rich_text[0].plain_text || p.id,
+        daysAgo: Math.ceil(
+            (Date.now() - new Date(p.created_time).getMilliseconds()) / 60000000 / 60 / 24
+        ),
         tags: p.properties.Tags.multi_select.map(t => ({
             name: t.name,
             color: t.color
         }))
     }));
+}
+
+export async function getBlogPost(slug: string) {
+    const data = await getDatabasePages(
+        process.env.NOTION_BLOG_DATABASE_ID || "",
+        {
+            "Slug": "rich_text"
+        }
+    );
+    const id = data.find(p => p.properties.Slug.rich_text[0].plain_text === slug)?.id;
+    if (!id) return undefined;
+
+    return await fetch(`https://notion-api.splitbee.io/v1/page/${id}`).then(r => r.json());
 }
