@@ -14,6 +14,10 @@ const nextConfig = {
         hostname: '**.amazonaws.com',
         pathname: '/secure.notion-static.com/**',
       },
+      {
+        protocol: 'https',
+        hostname: '**.notion.so',
+      }
     ],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

@@ -21,6 +21,8 @@ import React, {Fragment} from "react";
 import Link from "next/link";
 import {getBlogPosts, getProjects, getSocials} from "@/util/data";
 
+export const revalidate = 86400;
+
 export default async function Home() {
     const nav = [
         {name: "Socials", href: "#socials", icon: LinkIcon},
