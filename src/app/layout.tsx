@@ -1,8 +1,9 @@
 import './globals.css'
 
-import {Inter} from '@next/font/google'
+import {Inter} from 'next/font/google'
 import React from "react";
 import Providers from "@/app/providers";
+import {Metadata} from "next";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -20,4 +21,12 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
             </body>
         </html>
     )
+}
+
+export const metadata: Metadata = {
+    title: {
+        default: 'Damir Modyarov | @otomir23',
+        template: '%s | @otomir23',
+    },
+    description: "Damir Modyarov is a student web developer and UI designer from Moscow, Russia."
 }
