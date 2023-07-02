@@ -19,7 +19,7 @@ import avatar from "@/../public/avatar.jpg";
 import {Fragment} from "react";
 import Link from "next/link";
 import {getBlogPosts, getProjects, getSocials, getStack} from "@/util/data";
-import RelativeTime from "@/app/relative-time";
+import { formatDistanceToNow } from 'date-fns';
 
 export const dynamic = 'force-dynamic'
 
@@ -144,18 +144,21 @@ export default async function Home() {
                     {projects.map((project) => (
                         <Link
                             href={project.link} key={project.name}
-                            className="flex flex-col gap-3 rounded-lg border p-6
+                            className="flex flex-col gap-1 rounded-lg border p-6
                             border-neutral-200 dark:border-neutral-800"
                             target="_blank"
                             title={project.name}
                         >
-                            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+                            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
                                 {project.name}
                             </h3>
                             <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
                                 {project.description}
                             </p>
-                            <div className="flex flex-row gap-2 flex-wrap">
+                            <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm">
+                                {formatDistanceToNow(project.releasedAt)} ago
+                            </p>
+                            <div className="flex flex-row gap-2 flex-wrap mt-2">
                                 {project.tools.map(({tool}) => (
                                     <span
                                         className="text-xs sm:text-sm px-2 py-1 rounded-md font-bold bg-[var(--light-color)]
@@ -194,7 +197,7 @@ export default async function Home() {
                                     {post.title}
                                 </h3>
                                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
-                                    <RelativeTime timestamp={post.postedAt.valueOf()} />
+                                    {formatDistanceToNow(post.postedAt)} ago
                                 </p>
                             </div>
                         </Link>
