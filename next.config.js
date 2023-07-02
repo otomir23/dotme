@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -11,6 +8,7 @@ const nextConfig = {
       }
     ],
     dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   }
 }
