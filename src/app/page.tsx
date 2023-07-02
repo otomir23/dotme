@@ -8,7 +8,6 @@ import {
     WrenchScrewdriverIcon,
     XMarkIcon
 } from "@heroicons/react/20/solid";
-// noinspection ES6UnusedImports
 import {
     BriefcaseIcon as BigBriefcaseIcon,
     LinkIcon as BigLinkIcon,
@@ -17,9 +16,9 @@ import {
 } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import avatar from "@/../public/avatar.jpg";
-import React, {Fragment} from "react";
+import {Fragment} from "react";
 import Link from "next/link";
-import {getBlogPosts, getProjects, getSocials} from "@/util/data";
+import {getBlogPosts, getProjects, getSocials, getStack} from "@/util/data";
 import RelativeTime from "@/app/relative-time";
 
 export const dynamic = 'force-dynamic'
@@ -33,6 +32,7 @@ export default async function Home() {
     ]
 
     const socials = await getSocials();
+    const stack = await getStack();
     const projects = await getProjects();
     const blog = await getBlogPosts();
 
@@ -100,28 +100,38 @@ export default async function Home() {
                             href={social.link} key={social.name}
                             className="rounded-md p-2 border-2 bg-neutral-100 border-neutral-200 text-neutral-900
                             dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100 fill-current flex
-                            justify-center items-center"
+                            justify-center items-center -z-10"
                             target="_blank"
                             title={social.name}
                         >
-                            {
-                                social.icon ?
-                                    social.icon.type === "emoji" ?
-                                        <span className="text-sm">{social.icon.emoji}</span> :
-                                    social.icon.type === "file" ?
-                                        <Image
-                                            src={social.icon.file.url} alt={social.name} width={20} height={20}
-                                            className="w-5 h-5 brightness-0 dark:invert"
-                                        /> :
-                                    social.icon.type === "external" ?
-                                        <Image
-                                            src={social.icon.external.url} alt={social.name} width={20} height={20}
-                                            className="w-5 h-5 brightness-0 dark:invert"
-                                        /> :
-                                    <LinkIcon className="w-5 h-5"/>
-                                : <LinkIcon className="w-5 h-5"/>
-                            }
+                            <Image
+                                src={social.icon} alt={social.name} width={20} height={20}
+                                className="w-5 h-5 brightness-0 dark:invert"
+                            />
                         </Link>
+                    ))}
+                </div>
+            </section>
+            <section id="stack" className="mt-8 sm:mt-16">
+                <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                    <BigWrenchScrewdriverIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
+                    Technologies
+                </h2>
+                <div className="flex flex-col gap-4 mt-4 sm:mt-8">
+                    {stack.map(s => (
+                        <figure key={s.id}>
+                            <figcaption className="uppercase font-bold text-neutral-600 dark:text-neutral-400">
+                                {s.name}
+                            </figcaption>
+                            <div className="flex flex-wrap gap-2 mt-2">
+                                {s.tools.map((t) => (
+                                    <Image
+                                        src={t.icon} alt={t.name} key={t.id} width={20} height={20}
+                                        className="w-5 h-5 brightness-0 dark:invert -z-10"
+                                    />
+                                ))}
+                            </div>
+                        </figure>
                     ))}
                 </div>
             </section>
@@ -134,7 +144,7 @@ export default async function Home() {
                     {projects.map((project) => (
                         <Link
                             href={project.link} key={project.name}
-                            className="flex flex-col gap-3 rounded-md border p-6
+                            className="flex flex-col gap-3 rounded-lg border p-6
                             border-neutral-200 dark:border-neutral-800"
                             target="_blank"
                             title={project.name}
@@ -146,13 +156,18 @@ export default async function Home() {
                                 {project.description}
                             </p>
                             <div className="flex flex-row gap-2 flex-wrap">
-                                {project.tags.map((tag) => (
+                                {project.tools.map(({tool}) => (
                                     <span
-                                        className="text-xs sm:text-sm px-2 py-1 rounded-md bg-neutral-100
-                                        dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
-                                        key={tag.name}
+                                        className="text-xs sm:text-sm px-2 py-1 rounded-md font-bold bg-[var(--light-color)]
+                                        dark:bg-[var(--dark-color)] text-[var(--dark-color)] dark:text-[var(--light-color)]"
+                                        style={{
+                                            // @ts-ignore
+                                            '--light-color': tool.lightColor,
+                                            '--dark-color': tool.darkColor
+                                        }}
+                                        key={tool.id}
                                     >
-                                        {tag.name}
+                                        {tool.name}
                                     </span>
                                 ))}
                             </div>
@@ -179,19 +194,8 @@ export default async function Home() {
                                     {post.title}
                                 </h3>
                                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
-                                    <RelativeTime timestamp={post.postedAt} />
+                                    <RelativeTime timestamp={post.postedAt.valueOf()} />
                                 </p>
-                                <div className="flex flex-row gap-2 flex-wrap">
-                                    {post.tags.map((tag) => (
-                                        <span
-                                            className="text-xs sm:text-sm px-2 py-1 rounded-md bg-neutral-100
-                                            dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
-                                            key={tag.name}
-                                        >
-                                            {tag.name}
-                                        </span>
-                                    ))}
-                                </div>
                             </div>
                         </Link>
                     ))}

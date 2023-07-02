@@ -7,16 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.amazonaws.com',
-        pathname: '/secure.notion-static.com/**',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.notion.so',
+        hostname: 'upload.wikimedia.org'
       }
     ],
     dangerouslyAllowSVG: true,

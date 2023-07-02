@@ -1,8 +1,9 @@
 import {getBlogPost, getBlogPosts} from "@/util/data";
-import Notion from "@/app/blog/notion";
 import {notFound} from "next/navigation";
 import ThemeToggle from "@/app/theme-toggle";
 import Link from "next/link";
+import ReactMarkdown from 'react-markdown'
+import Image from "next/image";
 
 export async function generateStaticParams() {
     const posts = await getBlogPosts();
@@ -16,7 +17,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
 
     if (!data) {
         console.log(`No blog post found for slug: ${slug}`);
-        return notFound();
+        notFound();
     }
 
     return (
@@ -28,7 +29,14 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
                 <ThemeToggle />
             </nav>
             <div className="h-8" />
-            <Notion blockMap={data} fullPage={true} hideHeader={true} />
+            {data.image && <Image
+                src={data.image} alt={data.title} width={1024} height={256}
+                className="object-cover w-full aspect-[3/1] md:aspect-[4/1] mb-4 rounded"
+            />}
+            <h1 className="font-bold text-3xl">{data.title}</h1>
+            <ReactMarkdown>
+                {data.content}
+            </ReactMarkdown>
         </div>
     );
 }
