@@ -20,8 +20,9 @@ import avatar from "@/../public/avatar.jpg";
 import React, {Fragment} from "react";
 import Link from "next/link";
 import {getBlogPosts, getProjects, getSocials} from "@/util/data";
+import RelativeTime from "@/app/relative-time";
 
-export const revalidate = 86400;
+export const dynamic = 'force-dynamic'
 
 export default async function Home() {
     const nav = [
@@ -34,7 +35,6 @@ export default async function Home() {
     const socials = await getSocials();
     const projects = await getProjects();
     const blog = await getBlogPosts();
-    const timeFormatter = new Intl.RelativeTimeFormat("en-us");
 
     return (
         <>
@@ -179,12 +179,7 @@ export default async function Home() {
                                     {post.title}
                                 </h3>
                                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
-                                    {
-                                        timeFormatter.format(
-                                            -post.daysAgo,
-                                            "days"
-                                        )
-                                    }
+                                    <RelativeTime timestamp={post.postedAt} />
                                 </p>
                                 <div className="flex flex-row gap-2 flex-wrap">
                                     {post.tags.map((tag) => (

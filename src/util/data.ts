@@ -58,7 +58,7 @@ export type BlogPost = {
     image?: string;
     tags: SelectOption[];
     slug: string;
-    daysAgo: number;
+    postedAt: number;
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
@@ -75,9 +75,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         title: p.properties.Name.title[0].plain_text || "Untitled post",
         image: p.cover ? p.cover.type === "external" ? p.cover.external.url : p.cover.type === "file" ? p.cover.file.url : undefined : undefined,
         slug: p.properties.Slug.rich_text[0].plain_text || p.id,
-        daysAgo: Math.ceil(
-            (Date.now() - new Date(p.created_time).getMilliseconds()) / 60000000 / 60 / 24
-        ),
+        postedAt: new Date(p.created_time).valueOf(),
         tags: p.properties.Tags.multi_select.map(t => ({
             name: t.name,
             color: t.color
