@@ -47,7 +47,7 @@ export default async function Home({searchParams}: {searchParams: Record<string,
         <>
             <aside
                 className="flex items-center justify-between mb-8 sm:mb-16 sm:pt-8 sticky top-8 sm:top-0 bg-white
-                ring-8 ring-white dark:bg-neutral-950 dark:ring-neutral-950"
+                ring-8 ring-white dark:bg-neutral-950 dark:ring-neutral-950 z-10"
             >
                 <label>
                     <input type="checkbox" className="hidden peer"/>
