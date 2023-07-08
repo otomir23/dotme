@@ -20,10 +20,11 @@ import {Fragment} from "react";
 import Link from "next/link";
 import {getBlogPosts, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
+import ProjectSearch from "@/app/project-search";
 
 export const dynamic = 'force-dynamic'
 
-export default async function Home() {
+export default async function Home({searchParams}: {searchParams: Record<string, string>}) {
     const nav = [
         {name: "Socials", href: "#socials", icon: LinkIcon},
         {name: "Technologies", href: "#stack", icon: WrenchScrewdriverIcon},
@@ -33,7 +34,10 @@ export default async function Home() {
 
     const socials = await getSocials();
     const stack = await getStack();
-    const projects = await getProjects();
+    const projects = await getProjects({
+        name: searchParams['q'],
+        tool: Number(searchParams['tool']) || undefined
+    });
     const blog = await getBlogPosts();
 
     return (
@@ -125,10 +129,12 @@ export default async function Home() {
                             </figcaption>
                             <div className="flex flex-wrap gap-2 mt-2">
                                 {s.tools.map((t) => (
-                                    <Image
-                                        src={t.icon} alt={t.name} key={t.id} width={20} height={20}
-                                        className="w-5 h-5 brightness-0 dark:invert -z-10"
-                                    />
+                                    <Link key={t.id} href={`?tool=${t.id}#projects`}>
+                                        <Image
+                                            src={t.icon} alt={t.name} width={20} height={20}
+                                            className="w-5 h-5 brightness-0 dark:invert -z-10"
+                                        />
+                                    </Link>
                                 ))}
                             </div>
                         </figure>
@@ -141,6 +147,9 @@ export default async function Home() {
                     Portfolio
                 </h2>
                 <div className="flex flex-col gap-4 mt-4 sm:mt-8">
+                    <aside className="flex items-center gap-2">
+                        <ProjectSearch />
+                    </aside>
                     {projects.map((project) => (
                         <Link
                             href={project.link} key={project.name}
