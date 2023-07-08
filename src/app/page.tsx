@@ -59,7 +59,9 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                                 <a
                                     href={item.href}
                                     className="flex flex-row text-neutral-900 dark:text-neutral-100 gap-2 items-center
-                                    hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+                                    hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors focus:outline-none
+                                    focus:bg-neutral-100 dark:focus:bg-neutral-800 rounded focus:ring-4
+                                    ring-neutral-100 dark:ring-neutral-800"
                                 >
                                     <item.icon className="w-4 h-4"/>
                                     {item.name}
@@ -104,7 +106,8 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                             href={social.link} key={social.name}
                             className="rounded-md p-2 border-2 bg-neutral-100 border-neutral-200 text-neutral-900
                             dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100 fill-current flex
-                            justify-center items-center -z-10"
+                            justify-center items-center -z-10 focus:outline-none focus:ring ring-neutral-100
+                            dark:ring-neutral-900"
                             target="_blank"
                             title={social.name}
                         >
@@ -129,7 +132,11 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                             </figcaption>
                             <div className="flex flex-wrap gap-2 mt-2">
                                 {s.tools.map((t) => (
-                                    <Link key={t.id} href={`?tool=${t.id}#projects`}>
+                                    <Link
+                                        key={t.id} href={`?tool=${t.id}#projects`}
+                                        className="focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800
+                                        rounded focus:ring-4 ring-neutral-100 dark:ring-neutral-900"
+                                    >
                                         <Image
                                             src={t.icon} alt={t.name} width={20} height={20}
                                             className="w-5 h-5 brightness-0 dark:invert -z-10"
@@ -153,8 +160,8 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                     {projects.map((project) => (
                         <Link
                             href={project.link} key={project.name}
-                            className="flex flex-col gap-1 rounded-lg border p-6
-                            border-neutral-200 dark:border-neutral-800"
+                            className="flex flex-col gap-1 rounded-lg border p-6 focus:outline-none focus:ring ring-neutral-100
+                            dark:ring-neutral-900 border-neutral-200 dark:border-neutral-800"
                             target="_blank"
                             title={project.name}
                         >
@@ -196,7 +203,8 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                     {blog.map((post) => (
                         <Link
                             href={`/blog/${post.slug}`} key={post.slug}
-                            className="flex flex-col gap-3 rounded-md border border-neutral-200 dark:border-neutral-800"
+                            className="flex flex-col gap-3 rounded-md border border-neutral-200 dark:border-neutral-800
+                            focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900"
                         >
                             {post.image && <Image src={post.image} alt={post.title} width={1280} height={720}
                                     className="rounded-t-md aspect-video object-cover w-full h-48"

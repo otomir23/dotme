@@ -19,7 +19,7 @@ export default function ProjectSearch() {
                     router.replace(`?q=${e.target.value}${searchParams.has('t') ? `&t=${searchParams.get('t')}` : ''}`)
                 }}
                 className="border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-lg
-                py-2 px-4 rounded-lg appearance-none w-full focus:outline-none focus:ring focus:ring-neutral-100 dark:focus:ring-neutral-900"
+                py-2 px-4 rounded-lg appearance-none w-full focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900"
             />
             {transition && <div className="animate-spin border border-transparent border-b-neutral-500 aspect-square h-4 rounded-full" />}
         </>
