@@ -248,7 +248,9 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                                 width={174} height={174}
                                 className="rounded-md"
                             /> :
-                            <div className="w-[174px] h-[174px] rounded-lg bg-white dark:bg-neutral-950" />
+                            <div className="w-[174px] h-[174px] rounded-md bg-white dark:bg-neutral-950 flex items-center justify-center">
+                                <MusicalNoteIcon className="w-12 h-12 inline mr-2 text-neutral-500" />
+                            </div>
                         }
                         <figcaption className="sm:py-2">
                             <h4 className="text-2xl">{nowPlaying.name}</h4>
