@@ -5,6 +5,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'upload.wikimedia.org'
+      },
+      {
+        protocol: 'https',
+        hostname: 'lastfm.freetls.fastly.net'
       }
     ],
     dangerouslyAllowSVG: true,

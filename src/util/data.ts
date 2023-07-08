@@ -1,5 +1,9 @@
 import db from "@/util/db";
+import SimpleFM from '@solely/simple-fm';
 
+export type Track = {
+
+}
 
 export async function getSocials() {
     return db.social.findMany();
@@ -60,4 +64,13 @@ export async function getBlogPost(slug: string) {
             slug
         }
     });
+}
+
+export async function getNowPlaying() {
+    const lastFm = new SimpleFM(process.env.LASTFM_API_KEY || "");
+    const data = await lastFm.user.getRecentTracks({
+        username: process.env.LASTFM_USERNAME || "",
+    })
+    if (!data.search.nowPlaying) return null
+    return data.tracks[0] || null
 }

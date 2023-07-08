@@ -6,7 +6,8 @@ import {
     MapPinIcon,
     PencilIcon,
     WrenchScrewdriverIcon,
-    XMarkIcon
+    XMarkIcon,
+    MusicalNoteIcon
 } from "@heroicons/react/20/solid";
 import {
     BriefcaseIcon as BigBriefcaseIcon,
@@ -18,7 +19,7 @@ import Image from "next/image";
 import avatar from "@/../public/avatar.jpg";
 import {Fragment} from "react";
 import Link from "next/link";
-import {getBlogPosts, getProjects, getSocials, getStack} from "@/util/data";
+import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
 import ProjectSearch from "@/app/project-search";
 
@@ -39,6 +40,8 @@ export default async function Home({searchParams}: {searchParams: Record<string,
         tool: Number(searchParams['tool']) || undefined
     });
     const blog = await getBlogPosts();
+    const nowPlaying = await getNowPlaying();
+    const nowPlayingCover = nowPlaying?.image?.find(i => i.size === 'large')?.url || null;
 
     return (
         <>
@@ -223,6 +226,42 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                         </Link>
                     ))}
                 </div>
+            </section>
+            <section
+                id="lastfm"
+                className="mt-4 sm:mt-8 border bg-red-50 dark:bg-red-950 border-red-100 dark:border-red-900 text-red-900
+                dark:text-red-100 p-4 rounded-md relative"
+            >
+                <h3 className="text-lg font-bold mb-4">
+                    <MusicalNoteIcon className="w-6 h-6 inline mr-2" /> Listening to
+                </h3>
+                {nowPlaying ?
+                    <Link
+                        className="flex gap-4 sm:flex-row flex-col focus:outline-none focus:bg-red-100
+                        dark:focus:bg-red-900 transition-colors focus:ring-8 ring-red-100 dark:ring-red-900 rounded-md"
+                        href={nowPlaying.url} target="_blank"
+                    >
+                        {nowPlayingCover ?
+                            <Image
+                                src={nowPlayingCover}
+                                alt={`Album cover of ${nowPlaying.name} by ${nowPlaying.artist.name}`}
+                                width={174} height={174}
+                                className="rounded-md"
+                            /> :
+                            <div className="w-[174px] h-[174px] rounded-lg bg-white dark:bg-neutral-950" />
+                        }
+                        <figcaption className="sm:py-2">
+                            <h4 className="text-2xl">{nowPlaying.name}</h4>
+                            <h5 className="text-lg">
+                                <span className="text-red-800 dark:text-red-200">by</span> {nowPlaying.artist.name}
+                            </h5>
+                        </figcaption>
+                    </Link>:
+                    <p className="animate-pulse">Nothing right now</p>
+                }
+                <Link className="absolute right-2 bottom-2 text-xs" href="https://last.fm" target="_blank">
+                    Powered by Last.fm
+                </Link>
             </section>
         </>
     )
