@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'upload.wikimedia.org'
+        hostname: 'i.otomir23.me'
       },
       {
         protocol: 'https',
