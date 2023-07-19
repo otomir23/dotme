@@ -112,7 +112,7 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                             href={social.link} key={social.name}
                             className="rounded-md p-2 border-2 bg-neutral-100 border-neutral-200 text-neutral-900
                             dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100 fill-current flex
-                            justify-center items-center -z-10 focus:outline-none focus:ring ring-neutral-100
+                            justify-center items-center focus:outline-none focus:ring ring-neutral-100
                             dark:ring-neutral-900"
                             target="_blank"
                             title={social.name}
@@ -145,7 +145,7 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                                     >
                                         <Image
                                             src={t.icon} alt={t.name} width={20} height={20}
-                                            className="w-5 h-5 brightness-0 dark:invert -z-10"
+                                            className="w-5 h-5 brightness-0 dark:invert"
                                         />
                                     </Link>
                                 ))}
