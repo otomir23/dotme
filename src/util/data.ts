@@ -1,9 +1,7 @@
 import db from "@/util/db";
 import SimpleFM from '@solely/simple-fm';
 
-export type Track = {
-
-}
+export type Track = {}
 
 export async function getSocials() {
     return db.social.findMany();
@@ -17,18 +15,33 @@ export async function getStack() {
     })
 }
 
-export async function getProjects({name, tool}: {name?: string, tool?: number} = {}) {
+export async function getProjects(query: string | null = "", toolId: number | null = null) {
     return db.project.findMany({
         where: {
-            ...(name && {
-                name: {
-                    contains: name
-                }
+            ...(query && {
+                OR: [
+                    {
+                        name: {
+                            contains: query
+                        }
+                    },
+                    {
+                        tools: {
+                            some: {
+                                tool: {
+                                    name: {
+                                        contains: query
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
             }),
-            ...(tool && {
+            ...(toolId !== null && {
                 tools: {
                     some: {
-                        toolId: tool
+                        toolId: toolId
                     }
                 }
             })
@@ -48,8 +61,29 @@ export async function getProjects({name, tool}: {name?: string, tool?: number} =
     });
 }
 
-export async function getBlogPosts() {
+export async function getBlogPosts(query: string | null = "") {
     return db.blogPost.findMany({
+        where: {
+            ...(query && {
+                OR: [
+                    {
+                        title: {
+                            contains: query
+                        }
+                    },
+                    {
+                        content: {
+                            contains: query
+                        }
+                    },
+                    {
+                        slug: {
+                            contains: query
+                        }
+                    }
+                ]
+            }),
+        },
         orderBy: [
             {
                 postedAt: 'desc'

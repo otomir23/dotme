@@ -21,7 +21,7 @@ import {Fragment} from "react";
 import Link from "next/link";
 import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
-import ProjectSearch from "@/app/project-search";
+import Search from "@/app/search";
 
 export const dynamic = 'force-dynamic'
 
@@ -35,11 +35,8 @@ export default async function Home({searchParams}: {searchParams: Record<string,
 
     const socials = await getSocials();
     const stack = await getStack();
-    const projects = await getProjects({
-        name: searchParams['q'],
-        tool: Number(searchParams['tool']) || undefined
-    });
-    const blog = await getBlogPosts();
+    const projects = await getProjects(searchParams['project'] || null, Number(searchParams['tool']) || null);
+    const blog = await getBlogPosts(searchParams['post'] || null);
     const nowPlaying = await getNowPlaying();
     const nowPlayingCover = nowPlaying?.image?.find(i => i.size === 'large')?.url || null;
 
@@ -161,7 +158,7 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                 </h2>
                 <div className="flex flex-col gap-4 mt-4 sm:mt-8">
                     <aside className="flex items-center gap-2">
-                        <ProjectSearch />
+                        <Search property="project" placeholder="Find projects..." />
                     </aside>
                     {projects.map((project) => (
                         <Link
@@ -206,6 +203,9 @@ export default async function Home({searchParams}: {searchParams: Record<string,
                     Blog
                 </h2>
                 <div className="flex flex-col gap-4 mt-4 sm:mt-8">
+                    <aside className="flex items-center gap-2">
+                        <Search property="post" placeholder="Find posts..." />
+                    </aside>
                     {blog.map((post) => (
                         <Link
                             href={`/blog/${post.slug}`} key={post.slug}
