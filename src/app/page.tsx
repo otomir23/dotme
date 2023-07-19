@@ -22,10 +22,20 @@ import Link from "next/link";
 import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
 import Search from "@/app/search";
+import DatabaseError from "@/app/database-error";
 
 export const dynamic = 'force-dynamic'
+type ServerSearchParams = Record<string, string>
 
-export default async function Home({searchParams}: {searchParams: Record<string, string>}) {
+const load = async (searchParams: ServerSearchParams) => ({
+    socials: await getSocials(),
+    stack: await getStack(),
+    projects: await getProjects(searchParams['project'] || null, Number(searchParams['tool']) || null),
+    blog: await getBlogPosts(searchParams['post'] || null),
+    nowPlaying: await getNowPlaying(),
+})
+
+export default async function Home({searchParams}: {searchParams: ServerSearchParams}) {
     const nav = [
         {name: "Socials", href: "#socials", icon: LinkIcon},
         {name: "Technologies", href: "#stack", icon: WrenchScrewdriverIcon},
@@ -33,11 +43,19 @@ export default async function Home({searchParams}: {searchParams: Record<string,
         {name: "Blog", href: "#blog", icon: PencilIcon},
     ]
 
-    const socials = await getSocials();
-    const stack = await getStack();
-    const projects = await getProjects(searchParams['project'] || null, Number(searchParams['tool']) || null);
-    const blog = await getBlogPosts(searchParams['post'] || null);
-    const nowPlaying = await getNowPlaying();
+    const pageData = await load(searchParams).catch(e => {
+        console.error(e);
+        return null;
+    });
+    if (!pageData)
+        return <DatabaseError />
+    const {
+        socials,
+        stack,
+        projects,
+        blog,
+        nowPlaying
+    } = pageData;
     const nowPlayingCover = nowPlaying?.image?.find(i => i.size === 'large')?.url || null;
 
     return (

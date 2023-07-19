@@ -1,24 +1,24 @@
-import {getBlogPost, getBlogPosts} from "@/util/data";
+import {getBlogPost} from "@/util/data";
 import {notFound} from "next/navigation";
 import ThemeToggle from "@/app/theme-toggle";
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown'
 import Image from "next/image";
-
-export async function generateStaticParams() {
-    const posts = await getBlogPosts();
-    return posts.map((post) => ({
-        slug: post.slug,
-    }));
-}
+import DatabaseError from "@/app/database-error";
 
 export default async function BlogPost({ params: { slug } }: { params: { slug: string } }) {
-    const data = await getBlogPost(slug);
+    const data = await getBlogPost(slug).catch(e => {
+        console.error(e);
+        return "error" as const;
+    });
 
     if (!data) {
         console.log(`No blog post found for slug: ${slug}`);
         notFound();
     }
+
+    if (data === 'error')
+        return <DatabaseError />
 
     return (
         <div>
