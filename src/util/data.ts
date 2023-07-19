@@ -1,8 +1,6 @@
 import db from "@/util/db";
 import SimpleFM from '@solely/simple-fm';
 
-export type Track = {}
-
 export async function getSocials() {
     return db.social.findMany();
 }
