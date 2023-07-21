@@ -227,7 +227,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     {blog.map((post) => (
                         <Link
                             href={`/blog/${post.slug}`} key={post.slug}
-                            className="flex flex-col gap-3 rounded-md border border-neutral-200 dark:border-neutral-800
+                            className="flex flex-col rounded-md border border-neutral-200 dark:border-neutral-800
                             focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900"
                         >
                             {post.image && <Image src={post.image} alt={post.title} width={1280} height={720}
