@@ -23,9 +23,9 @@ import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/
 import { formatDistanceToNow } from 'date-fns';
 import Search from "@/app/search";
 import DatabaseError from "@/app/database-error";
+import {ServerSearchParams} from "@/util/util";
 
 export const dynamic = 'force-dynamic'
-type ServerSearchParams = Record<string, string>
 
 const load = async (searchParams: ServerSearchParams) => ({
     socials: await getSocials(),
