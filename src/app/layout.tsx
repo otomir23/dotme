@@ -10,7 +10,7 @@ const inter = Inter({subsets: ['latin']})
 export default function RootLayout({children}: { children: React.ReactNode }) {
     // noinspection HtmlRequiredTitleElement
     return (
-        <html lang="en">
+        <html lang="en" className="scroll-smooth">
             <head />
             <body className={`${inter.className} dark:bg-neutral-950`}>
                 <Providers>
