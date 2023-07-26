@@ -58,6 +58,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
         nowPlaying
     } = pageData;
     const nowPlayingCover = nowPlaying?.image?.find(i => i.size === 'large')?.url || null;
+    const {tool: _, ...clearSearchParams} = searchParams;
 
     return (
         <>
@@ -182,6 +183,16 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                 <div className="flex flex-col gap-4 mt-4 sm:mt-8">
                     <aside className="flex items-center gap-2">
                         <Search property="project" placeholder="Find projects..." />
+                        {searchParams['tool'] &&
+                            <Link
+                                className="min-w-max h-full rounded-md border-2 bg-neutral-100 border-neutral-200
+                                text-neutral-900 dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100
+                                focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900 py-2 px-4"
+                                href={`/?${new URLSearchParams(clearSearchParams).toString()}`}
+                            >
+                                Reset tool filter
+                            </Link>
+                        }
                     </aside>
                     {projects.map((project) => (
                         <Link
