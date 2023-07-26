@@ -24,6 +24,7 @@ import { formatDistanceToNow } from 'date-fns';
 import Search from "@/app/search";
 import DatabaseError from "@/app/database-error";
 import {ServerSearchParams} from "@/util/util";
+import Anchor from "@/app/anchor";
 
 export const dynamic = 'force-dynamic'
 
@@ -93,7 +94,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                 </label>
                 <ThemeToggle/>
             </aside>
-            <section id="me">
+            <section>
+                <Anchor id="me" />
                 <div className="flex flex-row gap-8 items-center">
                     <Image src={avatar} alt="My avatar"
                            width={128} height={128} quality={100}
@@ -116,7 +118,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     development, but I also sometimes create Minecraft mods or Discord bots.
                 </p>
             </section>
-            <section id="socials" className="mt-8 sm:mt-16">
+            <section className="mt-8 sm:mt-16">
+                <Anchor id="socials" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
                     <BigLinkIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Socials
@@ -140,7 +143,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     ))}
                 </div>
             </section>
-            <section id="stack" className="mt-8 sm:mt-16">
+            <section className="mt-8 sm:mt-16">
+                <Anchor id="stack" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
                     <BigWrenchScrewdriverIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Technologies
@@ -169,7 +173,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     ))}
                 </div>
             </section>
-            <section id="projects" className="mt-8 sm:mt-16">
+            <section className="mt-8 sm:mt-16">
+                <Anchor id="projects" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
                     <BigBriefcaseIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Portfolio
@@ -215,7 +220,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     ))}
                 </div>
             </section>
-            <section id="blog" className="mt-8 sm:mt-16">
+            <section className="mt-8 sm:mt-16">
+                <Anchor id="blog" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
                     <BigPencilIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Blog
@@ -246,10 +252,10 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                 </div>
             </section>
             <section
-                id="lastfm"
                 className="mt-4 sm:mt-8 border bg-red-50 dark:bg-red-950 border-red-100 dark:border-red-900 text-red-900
                 dark:text-red-100 p-4 rounded-md relative"
             >
+                <Anchor id="lastfm" />
                 <h3 className="text-lg font-bold mb-4">
                     <MusicalNoteIcon className="w-6 h-6 inline mr-2" /> Listening to
                 </h3>
