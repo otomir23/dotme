@@ -22,7 +22,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
 
     return (
         <div>
-            <nav className="flex items-center justify-between">
+            <nav className="flex items-center justify-between sticky top-0 pt-8 bg-white dark:bg-neutral-950">
                 <Link href="/" className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
                     &lt;--- Home
                 </Link>

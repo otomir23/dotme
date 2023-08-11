@@ -63,30 +63,29 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
     return (
         <>
             <aside
-                className="flex items-center justify-between mb-8 sm:mb-16 sm:pt-8 sticky top-8 sm:top-0 bg-white
+                className="flex items-center justify-between mb-8 sm:mb-16 pt-8 sticky top-0 bg-white
                 ring-8 ring-white dark:bg-neutral-950 dark:ring-neutral-950 z-10"
             >
                 <label>
                     <input type="checkbox" className="hidden peer"/>
                     <Bars3Icon className="w-6 h-6 sm:hidden cursor-pointer"/>
                     <nav className="
-                        -translate-x-full peer-checked:translate-x-0 flex flex-col sm:flex-row sm:gap-6
-                        sm:items-center absolute sm:static sm:translate-x-0 transition-transform gap-4
-                        bg-neutral-100/95 dark:bg-neutral-900/95 sm:bg-transparent sm:dark:bg-transparent
-                        w-screen sm:w-auto -top-8 -left-8 p-8 sm:p-0 h-screen sm:h-auto select-none z-10
+                        -translate-x-full peer-checked:translate-x-0 flex flex-col sm:flex-row gap-6
+                        sm:items-center absolute sm:static sm:translate-x-0 transition-transform
+                        bg-white dark:bg-neutral-950 sm:bg-transparent sm:dark:bg-transparent
+                        w-screen sm:w-auto top-0 -left-8 p-8 sm:p-0 h-screen sm:h-auto select-none z-10
                     ">
                         <XMarkIcon className="w-8 h-8 sm:hidden cursor-pointer" key="xmarkicon"/>
                         {nav.map((item) => (
                             <Fragment key={item.name}>
-                                <div className="sm:hidden w-full h-px bg-neutral-200 dark:bg-neutral-800"/>
                                 <a
                                     href={item.href}
-                                    className="flex flex-row text-neutral-900 dark:text-neutral-100 gap-2 items-center
+                                    className="flex flex-row text-neutral-900 dark:text-neutral-100 sm:gap-2 items-center
                                     hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors focus:outline-none
-                                    focus:bg-neutral-100 dark:focus:bg-neutral-800 rounded focus:ring-4
-                                    ring-neutral-100 dark:ring-neutral-800"
+                                    focus:bg-neutral-100 dark:focus:bg-neutral-800 rounded focus:ring-4 text-xl sm:text-base
+                                    ring-neutral-100 dark:ring-neutral-800 gap-4"
                                 >
-                                    <item.icon className="w-4 h-4"/>
+                                    <item.icon className="w-6 h-6 sm:w-4 sm:h-4"/>
                                     {item.name}
                                 </a>
                             </Fragment>
