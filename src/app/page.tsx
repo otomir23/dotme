@@ -21,10 +21,10 @@ import {Fragment} from "react";
 import Link from "next/link";
 import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
-import Search from "@/app/search";
 import DatabaseError from "@/app/database-error";
 import {ServerSearchParams} from "@/util/util";
 import Anchor from "@/app/anchor";
+import Searchable from "@/app/searchable";
 
 export const dynamic = 'force-dynamic'
 
@@ -67,7 +67,12 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
         nowPlaying
     } = pageData;
     const nowPlayingCover = nowPlaying?.image?.find(i => i.size === 'large')?.url || null;
-    const {tool: _, ...clearSearchParams} = searchParams;
+    const {tool, ...clearSearchParams} = searchParams;
+    const selectedTool = tool && stack
+        .map(c => c.tools)
+        .flat()
+        .find(t => String(t.id) === tool)
+        || null
 
     return (
         <>
@@ -188,21 +193,29 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     <BigBriefcaseIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Portfolio
                 </h2>
-                <div className="flex flex-col gap-4 mt-4 sm:mt-8">
-                    <aside className="flex items-center gap-2">
-                        <Search property="project" placeholder="Find projects..." />
-                        {searchParams['tool'] &&
-                            <Link
-                                className="min-w-max h-full rounded-md border-2 bg-neutral-100 border-neutral-200
-                                text-neutral-900 dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100
-                                focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900 py-2 px-4"
-                                href={`/?${new URLSearchParams(clearSearchParams).toString()}`}
-                            >
-                                Reset tool filter
-                            </Link>
-                        }
-                    </aside>
-                    {projects.map((project) => (
+                <Searchable
+                    data={projects}
+                    plural="projects"
+                    property="project"
+                    placeholder="Find projects..."
+                    skeleton={<div className="rounded-lg bg-neutral-200 dark:bg-neutral-800 animate-pulse h-40" />}
+                    aside={selectedTool &&
+                        <Link
+                            className="min-w-max h-full rounded-md border-2 bg-neutral-100 border-neutral-200 gap-2
+                                    text-neutral-900 dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100
+                                    focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900 py-3 px-4 flex"
+                            href={`/?${new URLSearchParams(clearSearchParams).toString()}`}
+                            scroll={false}
+                        >
+                            <Image
+                                src={selectedTool.icon} alt={selectedTool.name} width={20} height={20}
+                                className="w-4 h-4 brightness-0 dark:invert"
+                            />
+                            <XMarkIcon className="w-4 h-4" />
+                        </Link>
+                    }
+                >
+                    {(project) => (
                         <Link
                             href={project.link} key={project.name}
                             className="flex flex-col gap-1 rounded-lg border p-6 focus:outline-none focus:ring ring-neutral-100
@@ -236,8 +249,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                                 ))}
                             </div>
                         </Link>
-                    ))}
-                </div>
+                    )}
+                </Searchable>
             </section>
             <section className="mt-8 sm:mt-16">
                 <Anchor id="blog" />
@@ -245,18 +258,21 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     <BigPencilIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Blog
                 </h2>
-                <div className="flex flex-col gap-4 mt-4 sm:mt-8">
-                    <aside className="flex items-center gap-2">
-                        <Search property="post" placeholder="Find posts..." />
-                    </aside>
-                    {blog.map((post) => (
+                <Searchable
+                    property="post"
+                    placeholder="Find posts..."
+                    data={blog}
+                    plural="blog pots"
+                    skeleton={<div className="rounded-lg bg-neutral-200 dark:bg-neutral-800 animate-pulse h-72" />}
+                >
+                    {(post) => (
                         <Link
                             href={`/blog/${post.slug}`} key={post.slug}
                             className="flex flex-col rounded-md border border-neutral-200 dark:border-neutral-800
                             focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900"
                         >
                             {post.image && <Image src={post.image} alt={post.title} width={1280} height={720}
-                                    className="rounded-t-md aspect-video object-cover w-full h-48"
+                                                  className="rounded-t-md aspect-video object-cover w-full h-48"
                             />}
                             <div className="flex flex-col gap-2 p-6">
                                 <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
@@ -267,8 +283,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                                 </p>
                             </div>
                         </Link>
-                    ))}
-                </div>
+                    )}
+                </Searchable>
             </section>
             <section
                 className="mt-4 sm:mt-8 border bg-red-50 dark:bg-red-950 border-red-100 dark:border-red-900 text-red-900
