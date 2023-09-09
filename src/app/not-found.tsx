@@ -2,6 +2,10 @@ import ErrorBase from "@/app/error-base";
 import Link from "next/link";
 import {MagnifyingGlassMinusIcon} from "@heroicons/react/24/solid";
 
+export const metadata = {
+    title: 'Not found'
+}
+
 export default function NotFound() {
     return (
         <ErrorBase
