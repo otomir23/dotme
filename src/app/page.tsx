@@ -7,7 +7,7 @@ import {
     PencilIcon,
     WrenchScrewdriverIcon,
     XMarkIcon,
-    MusicalNoteIcon
+    MusicalNoteIcon, ExclamationTriangleIcon
 } from "@heroicons/react/20/solid";
 import {
     BriefcaseIcon as BigBriefcaseIcon,
@@ -324,6 +324,17 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     Powered by Last.fm
                 </Link>
             </section>
+            <noscript>
+                <p className="mt-4 sm:mt-8">
+                    <ExclamationTriangleIcon className="inline w-5 h-5" />{' '}
+                    Hi again! Looks like you have JS disabled. I tried to optimise the website to be usable without scripts,
+                    but some things may still be broken. If you find that something is not working right, open an issue or{' '}
+                    <Link className="decoration-dashed underline underline-offset-4" href="https://t.me/otomir23">
+                        contact me
+                    </Link>{' '}
+                    to resolve the issue.
+                </p>
+            </noscript>
         </>
     )
 }
