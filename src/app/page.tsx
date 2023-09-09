@@ -28,6 +28,15 @@ import Anchor from "@/app/anchor";
 
 export const dynamic = 'force-dynamic'
 
+export function generateMetadata({searchParams}: {searchParams: ServerSearchParams}) {
+    return {
+        robots: {
+            // Hide filtered versions from search
+            index: Object.entries(searchParams).length === 0
+        }
+    }
+}
+
 const load = async (searchParams: ServerSearchParams) => ({
     socials: await getSocials(),
     stack: await getStack(),
