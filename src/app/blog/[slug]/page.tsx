@@ -6,6 +6,15 @@ import ReactMarkdown from 'react-markdown'
 import Image from "next/image";
 import DatabaseError from "@/app/database-error";
 
+export async function generateMetadata({ params: { slug } }: { params: { slug: string } }) {
+    const data = await getBlogPost(slug);
+    if (!data) notFound()
+
+    return {
+        title: data.title
+    }
+}
+
 export default async function BlogPost({ params: { slug } }: { params: { slug: string } }) {
     const data = await getBlogPost(slug).catch(e => {
         console.error(e);
