@@ -22,17 +22,22 @@ import Link from "next/link";
 import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
 import DatabaseError from "@/app/database-error";
-import {ServerSearchParams} from "@/util/util";
+import {canonicalUrl, ServerSearchParams} from "@/util/util";
 import Anchor from "@/app/anchor";
 import Searchable from "@/app/searchable";
+import {Metadata} from "next";
 
 export const dynamic = 'force-dynamic'
 
-export function generateMetadata({searchParams}: {searchParams: ServerSearchParams}) {
+export function generateMetadata({searchParams}: {searchParams: ServerSearchParams}): Metadata {
     return {
+        metadataBase: new URL(canonicalUrl),
         robots: {
             // Hide filtered versions from search
             index: Object.entries(searchParams).length === 0
+        },
+        alternates: {
+            canonical: '/'
         }
     }
 }
