@@ -172,7 +172,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                             <div className="flex flex-wrap gap-2 mt-2">
                                 {s.tools.map((t) => (
                                     <Link
-                                        key={t.id} href={`?tool=${t.id}#projects`}
+                                        key={t.id} href={`?tool=${t.id}#projects`} rel="nofollow"
                                         className="focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800
                                         rounded focus:ring-4 ring-neutral-100 dark:ring-neutral-900"
                                     >
