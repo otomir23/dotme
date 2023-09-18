@@ -21,6 +21,7 @@ import {canonicalUrl, ServerSearchParams} from "@/util/util";
 import Anchor from "@/app/anchor";
 import Searchable from "@/app/searchable";
 import {Metadata} from "next";
+import HomeSection from "@/app/home-section";
 
 export const dynamic = 'force-dynamic'
 
@@ -132,12 +133,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     development, but I also sometimes create Minecraft mods or Discord bots.
                 </p>
             </section>
-            <section className="mt-8 sm:mt-16">
-                <Anchor id="socials" />
-                <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <LinkIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
-                    Socials
-                </h2>
+            <HomeSection id="socials" title="Socials" icon={LinkIcon}>
                 <div className="flex flex-row gap-4 mt-4 sm:mt-8 flex-wrap">
                     {socials.map((social) => (
                         <Link
@@ -156,13 +152,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                         </Link>
                     ))}
                 </div>
-            </section>
-            <section className="mt-8 sm:mt-16">
-                <Anchor id="stack" />
-                <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <WrenchIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
-                    Technologies
-                </h2>
+            </HomeSection>
+            <HomeSection id="stack" title="Technologies" icon={WrenchIcon}>
                 <div className="flex flex-col gap-4 mt-4 sm:mt-8">
                     {stack.map(s => (
                         <figure key={s.id}>
@@ -186,13 +177,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                         </figure>
                     ))}
                 </div>
-            </section>
-            <section className="mt-8 sm:mt-16">
-                <Anchor id="projects" />
-                <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <BriefcaseIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
-                    Portfolio
-                </h2>
+            </HomeSection>
+            <HomeSection id="projects" title="Portfolio" icon={BriefcaseIcon}>
                 <Searchable
                     data={projects}
                     plural="projects"
@@ -251,13 +237,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                         </Link>
                     )}
                 </Searchable>
-            </section>
-            <section className="mt-8 sm:mt-16">
-                <Anchor id="blog" />
-                <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <PenIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
-                    Blog
-                </h2>
+            </HomeSection>
+            <HomeSection id="blog" title="Blog" icon={PenIcon}>
                 <Searchable
                     property="post"
                     placeholder="Find posts..."
@@ -285,7 +266,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                         </Link>
                     )}
                 </Searchable>
-            </section>
+            </HomeSection>
             <section
                 className="mt-4 sm:mt-8 border bg-red-50 dark:bg-red-950 border-red-100 dark:border-red-900 text-red-900
                 dark:text-red-100 p-4 rounded-md relative"
