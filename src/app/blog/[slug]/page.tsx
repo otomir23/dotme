@@ -1,10 +1,11 @@
 import {getBlogPost} from "@/util/data";
 import {notFound} from "next/navigation";
 import ThemeToggle from "@/app/theme-toggle";
-import Link from "next/link";
 import ReactMarkdown from 'react-markdown'
 import Image from "next/image";
 import DatabaseError from "@/app/database-error";
+import NavLink from "@/app/nav-link";
+import {HomeIcon} from "lucide-react";
 
 export async function generateMetadata({ params: { slug } }: { params: { slug: string } }) {
     const data = await getBlogPost(slug);
@@ -32,9 +33,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
     return (
         <div>
             <nav className="flex items-center justify-between sticky top-0 pt-8 bg-white dark:bg-neutral-950">
-                <Link href="/" className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
-                    &lt;--- Home
-                </Link>
+                <NavLink title="Home" href="/" icon={HomeIcon} />
                 <ThemeToggle />
             </nav>
             <div className="h-8" />

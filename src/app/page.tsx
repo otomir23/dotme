@@ -22,6 +22,7 @@ import Anchor from "@/app/anchor";
 import Searchable from "@/app/searchable";
 import {Metadata} from "next";
 import HomeSection from "@/app/home-section";
+import NavLink from "@/app/nav-link";
 
 export const dynamic = 'force-dynamic'
 
@@ -47,13 +48,6 @@ const load = async (searchParams: ServerSearchParams) => ({
 })
 
 export default async function Home({searchParams}: {searchParams: ServerSearchParams}) {
-    const nav = [
-        {name: "Socials", href: "#socials", icon: LinkIcon},
-        {name: "Technologies", href: "#stack", icon: WrenchIcon},
-        {name: "Portfolio", href: "#projects", icon: BriefcaseIcon},
-        {name: "Blog", href: "#blog", icon: PenIcon},
-    ]
-
     const pageData = await load(searchParams).catch(e => {
         console.error(e);
         return null;
@@ -91,20 +85,10 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                         w-screen sm:w-auto top-0 -left-8 p-8 sm:p-0 h-screen sm:h-auto select-none z-10
                     ">
                         <XIcon size={32} className="sm:hidden cursor-pointer" key="xmarkicon"/>
-                        {nav.map((item) => (
-                            <Fragment key={item.name}>
-                                <a
-                                    href={item.href}
-                                    className="flex flex-row text-neutral-900 dark:text-neutral-100 sm:gap-2 items-center
-                                    hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors focus:outline-none
-                                    focus:bg-neutral-100 dark:focus:bg-neutral-800 rounded focus:ring-4 text-xl sm:text-base
-                                    ring-neutral-100 dark:ring-neutral-800 gap-4"
-                                >
-                                    <item.icon className="w-6 h-6 sm:w-4 sm:h-4"/>
-                                    {item.name}
-                                </a>
-                            </Fragment>
-                        ))}
+                        <NavLink title="Socials" href="#socials" icon={LinkIcon} />
+                        <NavLink title="Technologies" href="#stack" icon={WrenchIcon} />
+                        <NavLink title="Portfolio" href="#projects" icon={BriefcaseIcon} />
+                        <NavLink title="Blog" href="#blog" icon={PenIcon} />
                     </nav>
                 </label>
                 <ThemeToggle/>
