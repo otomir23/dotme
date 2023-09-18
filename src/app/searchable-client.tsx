@@ -2,7 +2,7 @@
 
 import {useRouter, useSearchParams} from "next/navigation";
 import {ReactNode, useEffect, useState} from "react";
-import {MagnifyingGlassIcon} from "@heroicons/react/20/solid";
+import {SearchIcon} from "lucide-react";
 
 export type SearchableClientProps = {
     property: string,
@@ -38,7 +38,7 @@ export default function SearchableClient({property, placeholder = "", children, 
                         placeholder={placeholder}
                     />
                     <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2">
-                        <MagnifyingGlassIcon className="w-4 h-4" />
+                        <SearchIcon size={16} />
                     </button>
                 </form>
                 {aside}

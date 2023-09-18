@@ -1,20 +1,15 @@
 import ThemeToggle from "@/app/theme-toggle";
 import {
-    Bars3Icon,
+    AlertTriangle,
     BriefcaseIcon,
     LinkIcon,
     MapPinIcon,
-    PencilIcon,
-    WrenchScrewdriverIcon,
-    XMarkIcon,
-    MusicalNoteIcon, ExclamationTriangleIcon
-} from "@heroicons/react/20/solid";
-import {
-    BriefcaseIcon as BigBriefcaseIcon,
-    LinkIcon as BigLinkIcon,
-    PencilIcon as BigPencilIcon,
-    WrenchScrewdriverIcon as BigWrenchScrewdriverIcon
-} from "@heroicons/react/24/solid";
+    MenuIcon,
+    Music4Icon,
+    PenIcon,
+    WrenchIcon,
+    XIcon
+} from "lucide-react";
 import Image from "next/image";
 import avatar from "@/../public/avatar.jpg";
 import {Fragment} from "react";
@@ -53,9 +48,9 @@ const load = async (searchParams: ServerSearchParams) => ({
 export default async function Home({searchParams}: {searchParams: ServerSearchParams}) {
     const nav = [
         {name: "Socials", href: "#socials", icon: LinkIcon},
-        {name: "Technologies", href: "#stack", icon: WrenchScrewdriverIcon},
+        {name: "Technologies", href: "#stack", icon: WrenchIcon},
         {name: "Portfolio", href: "#projects", icon: BriefcaseIcon},
-        {name: "Blog", href: "#blog", icon: PencilIcon},
+        {name: "Blog", href: "#blog", icon: PenIcon},
     ]
 
     const pageData = await load(searchParams).catch(e => {
@@ -87,14 +82,14 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             >
                 <label>
                     <input type="checkbox" className="hidden peer"/>
-                    <Bars3Icon className="w-6 h-6 sm:hidden cursor-pointer"/>
+                    <MenuIcon className="sm:hidden cursor-pointer"/>
                     <nav className="
                         -translate-x-full peer-checked:translate-x-0 flex flex-col sm:flex-row gap-6
                         sm:items-center absolute sm:static sm:translate-x-0 transition-transform
                         bg-white dark:bg-neutral-950 sm:bg-transparent sm:dark:bg-transparent
                         w-screen sm:w-auto top-0 -left-8 p-8 sm:p-0 h-screen sm:h-auto select-none z-10
                     ">
-                        <XMarkIcon className="w-8 h-8 sm:hidden cursor-pointer" key="xmarkicon"/>
+                        <XIcon size={32} className="sm:hidden cursor-pointer" key="xmarkicon"/>
                         {nav.map((item) => (
                             <Fragment key={item.name}>
                                 <a
@@ -131,7 +126,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                 </div>
                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-lg mt-4 sm:mt-8">
                     Hi! I’m Damir Modyarov <span className="text-neutral-500"> (@otomir23)</span>.
-                    I live in <MapPinIcon className="w-4 h-4 inline text-blue-600"/>{" "}
+                    I live in <MapPinIcon size={16} className="inline text-blue-600"/>{" "}
                     <span className="underline text-blue-600 cursor-help" title="Great city!">Moscow, Russia</span> and
                     I am a developer, designer and a very lazy person. I primary specialize in web design and
                     development, but I also sometimes create Minecraft mods or Discord bots.
@@ -140,7 +135,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             <section className="mt-8 sm:mt-16">
                 <Anchor id="socials" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <BigLinkIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
+                    <LinkIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Socials
                 </h2>
                 <div className="flex flex-row gap-4 mt-4 sm:mt-8 flex-wrap">
@@ -165,7 +160,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             <section className="mt-8 sm:mt-16">
                 <Anchor id="stack" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <BigWrenchScrewdriverIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
+                    <WrenchIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Technologies
                 </h2>
                 <div className="flex flex-col gap-4 mt-4 sm:mt-8">
@@ -195,7 +190,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             <section className="mt-8 sm:mt-16">
                 <Anchor id="projects" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <BigBriefcaseIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
+                    <BriefcaseIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Portfolio
                 </h2>
                 <Searchable
@@ -216,7 +211,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                                 src={selectedTool.icon} alt={selectedTool.name} width={20} height={20}
                                 className="w-4 h-4 brightness-0 dark:invert"
                             />
-                            <XMarkIcon className="w-4 h-4" />
+                            <XIcon size={16} />
                         </Link>
                     }
                 >
@@ -260,7 +255,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             <section className="mt-8 sm:mt-16">
                 <Anchor id="blog" />
                 <h2 className="text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    <BigPencilIcon className="w-8 h-8 inline text-neutral-900 dark:text-neutral-100 mr-4"/>
+                    <PenIcon size={32} className="inline text-neutral-900 dark:text-neutral-100 mr-4"/>
                     Blog
                 </h2>
                 <Searchable
@@ -297,7 +292,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             >
                 <Anchor id="lastfm" />
                 <h3 className="text-lg font-bold mb-4">
-                    <MusicalNoteIcon className="w-6 h-6 inline mr-2" /> Listening to
+                    <Music4Icon className="inline mr-2" /> Listening to
                 </h3>
                 {nowPlaying ?
                     <Link
@@ -313,7 +308,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                                 className="rounded-md"
                             /> :
                             <div className="w-[174px] h-[174px] rounded-md bg-white dark:bg-neutral-950 flex items-center justify-center">
-                                <MusicalNoteIcon className="w-12 h-12 inline mr-2 text-neutral-500" />
+                                <Music4Icon size={48} className="inline mr-2 text-neutral-500" />
                             </div>
                         }
                         <figcaption className="sm:py-2">
@@ -331,7 +326,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             </section>
             <noscript>
                 <p className="mt-4 sm:mt-8">
-                    <ExclamationTriangleIcon className="inline w-5 h-5" />{' '}
+                    <AlertTriangle className="inline" />{' '}
                     Hi again! Looks like you have JS disabled. I tried to optimise the website to be usable without scripts,
                     but some things may still be broken. If you find that something is not working right, open an issue or{' '}
                     <Link className="decoration-dashed underline underline-offset-4" href="https://t.me/otomir23">

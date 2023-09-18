@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import {useEffect, useMemo, useState} from "react";
-import {SunIcon, MoonIcon} from "@heroicons/react/20/solid";
+import {LucideIcon, SunIcon, MoonIcon} from "lucide-react";
 
 export default function ThemeToggle() {
     const { resolvedTheme, setTheme } = useTheme();
@@ -12,7 +12,7 @@ export default function ThemeToggle() {
         setThemeIcon(resolvedTheme === "dark");
     }, [resolvedTheme]);
 
-    const ThemeIcon = useMemo(() => themeIcon ? SunIcon : MoonIcon, [themeIcon]);
+    const ThemeIcon = useMemo<LucideIcon>(() => themeIcon ? SunIcon : MoonIcon, [themeIcon]);
 
     return (
         <button
@@ -20,7 +20,7 @@ export default function ThemeToggle() {
             dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100 focus:ring ring-neutral-100 dark:ring-neutral-900"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         >
-            <ThemeIcon className="w-4 h-4" />
+            <ThemeIcon size={16} />
         </button>
     );
 }

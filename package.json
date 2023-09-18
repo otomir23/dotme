@@ -15,10 +15,10 @@
     "prisma:studio": "dotenv -c -- prisma studio"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.14",
     "@prisma/client": "^5.2.0",
     "@solely/simple-fm": "^1.5.3",
     "date-fns": "^2.30.0",
+    "lucide-react": "^0.276.0",
     "next": "^13.4.19",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",

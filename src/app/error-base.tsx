@@ -1,17 +1,16 @@
-import {ExclamationCircleIcon} from "@heroicons/react/24/solid";
+import {AlertOctagonIcon, LucideIcon} from "lucide-react";
 import {ReactNode} from "react";
-import {ReactComponentLike} from "prop-types";
 import Link from "next/link";
 
 export type ErrorBaseProps = {
-    icon?: ReactComponentLike,
+    icon?: LucideIcon,
     title?: string,
     children?: ReactNode
 }
 
 export default function ErrorBase(
     {
-        icon: Icon = ExclamationCircleIcon,
+        icon: Icon = AlertOctagonIcon,
         title = "Unknown error",
         children: description = (<>
             Please{' '}
@@ -22,7 +21,7 @@ export default function ErrorBase(
 ) {
     return (
         <div className="mx-auto mt-32 text-center max-w-md w-full">
-            <Icon className="w-8 h-8 inline mb-4" />
+            <Icon size={32} className="inline mb-4" />
             <h1 className="text-2xl font-bold">{title}</h1>
             <p>{description}</p>
         </div>

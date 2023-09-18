@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {MagnifyingGlassMinusIcon} from "@heroicons/react/20/solid";
+import {SearchXIcon} from "lucide-react";
 import SearchableClient, {SearchableClientProps} from "@/app/searchable-client";
 
 export type SearchableProps<T> = {
@@ -15,7 +15,7 @@ export default function Searchable<T>({children, data, plural, ...searchProps}: 
                 data.length > 0 ?
                     data.map(children) :
                     <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                        <MagnifyingGlassMinusIcon className="inline w-4 h-4" /> Sorry, no {plural} found.
+                        <SearchXIcon className="inline w-4 h-4" /> Sorry, no {plural} found.
                     </p>
             }
         </SearchableClient>

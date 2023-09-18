@@ -1,6 +1,6 @@
 import ErrorBase from "@/app/error-base";
 import Link from "next/link";
-import {MagnifyingGlassMinusIcon} from "@heroicons/react/24/solid";
+import {SearchXIcon} from "lucide-react";
 
 export const metadata = {
     title: 'Not found'
@@ -9,7 +9,7 @@ export const metadata = {
 export default function NotFound() {
     return (
         <ErrorBase
-            icon={MagnifyingGlassMinusIcon}
+            icon={SearchXIcon}
             title="Page not found"
         >
             Sorry, but there{"'"}s no such page on my website.{' '}
