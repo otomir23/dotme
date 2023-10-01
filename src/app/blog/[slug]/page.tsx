@@ -12,7 +12,8 @@ export async function generateMetadata({ params: { slug } }: { params: { slug: s
     if (!data) notFound()
 
     return {
-        title: data.title
+        title: data.title,
+        description: data.content
     }
 }
 
