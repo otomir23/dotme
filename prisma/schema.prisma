@@ -69,6 +69,7 @@ model BlogPost {
   image    String?
   postedAt DateTime @default(now())
   content  String
+  unlisted Boolean  @default(true)
 
   @@map("posts")
 }

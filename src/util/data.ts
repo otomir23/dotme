@@ -62,6 +62,9 @@ export async function getProjects(query: string | null = "", toolId: number | nu
 export async function getBlogPosts(query: string | null = "") {
     return db.blogPost.findMany({
         where: {
+            unlisted: {
+                equals: false
+            },
             ...(query && {
                 OR: [
                     {
