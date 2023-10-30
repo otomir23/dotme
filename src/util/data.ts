@@ -5,6 +5,14 @@ export async function getSocials() {
     return db.social.findMany();
 }
 
+export async function getSocial(name: string) {
+    return db.social.findFirst({
+        where: {
+            name
+        }
+    });
+}
+
 export async function getStack() {
     return db.toolCategory.findMany({
         include: {
