@@ -44,7 +44,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
             <article className="prose prose-neutral dark:prose-invert prose-img:rounded w-full max-w-none">
                 {data.image && <Image
                     src={data.image} alt={data.title} width={1024} height={256}
-                    className="object-cover w-full aspect-[3/1] md:aspect-[4/1] mb-4 rounded"
+                    className="object-cover w-full aspect-[3/1] mb-4 rounded"
                 />}
                 <ReactMarkdown remarkPlugins={[ remarkGfm, remarkToc ]} components={{
                     'a': ({href, ref, ...props}: ComponentProps<'a'>) => <Link href={href || "#"} target="_blank" {...props} />
