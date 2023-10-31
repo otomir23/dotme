@@ -1,6 +1,6 @@
 import {AlertOctagonIcon, LucideIcon} from "lucide-react";
 import {ReactNode} from "react";
-import Link from "next/link";
+import StyledLink from "@/app/styled-link";
 
 export type ErrorBaseProps = {
     icon?: LucideIcon,
@@ -14,7 +14,7 @@ export default function ErrorBase(
         title = "Unknown error",
         children: description = (<>
             Please{' '}
-            <Link className="decoration-dashed underline underline-offset-4" href="https://t.me/otomir23">contact me</Link>{' '}
+            <StyledLink href="https://t.me/otomir23">contact me</StyledLink>{' '}
             to resolve the issue.
         </>)
     }: ErrorBaseProps

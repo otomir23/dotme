@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import avatar from "@/../public/avatar.jpg";
-import {Fragment} from "react";
 import Link from "next/link";
 import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
@@ -23,6 +22,7 @@ import Searchable from "@/app/searchable";
 import {Metadata} from "next";
 import HomeSection from "@/app/home-section";
 import NavLink from "@/app/nav-link";
+import StyledLink from "@/app/styled-link";
 
 export const dynamic = 'force-dynamic'
 
@@ -111,11 +111,11 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                 </div>
                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-lg mt-4 sm:mt-8">
                     Hi! I’m Damir Modyarov <span className="text-neutral-500"> (@otomir23)</span>.
-                    I live in <MapPinIcon size={16} className="inline text-blue-600"/>{" "}
-                    <span className="underline text-blue-600 cursor-help" title="Great city!">Moscow, Russia</span> and
+                    I live in <MapPinIcon size={16} className="inline"/>{" "}
+                    <span className="font-bold cursor-help" title="Great city!">Moscow, Russia</span> and
                     I am a developer, designer and a very lazy person. I primary specialize in web design and
                     development, but I also sometimes create Minecraft mods or Discord bots.{" "}
-                    <Link href="/blog/about-me" className="underline text-blue-600">{'-->'}</Link>
+                    <StyledLink href="/blog/about-me">More {'-->'}</StyledLink>
                 </p>
             </section>
             <HomeSection id="socials" title="Socials" icon={LinkIcon}>

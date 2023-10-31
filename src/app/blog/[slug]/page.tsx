@@ -10,7 +10,7 @@ import remarkGfm from "remark-gfm";
 import remarkToc from "remark-toc";
 import rehypeSlug from "rehype-slug";
 import {ComponentProps} from "react";
-import Link from "next/link";
+import StyledLink from "@/app/styled-link";
 
 export async function generateMetadata({ params: { slug } }: { params: { slug: string } }) {
     const data = await getBlogPost(slug);
@@ -48,7 +48,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
                     className="object-cover w-full aspect-[3/1] mb-4 rounded"
                 />}
                 <ReactMarkdown remarkPlugins={[ remarkGfm, remarkToc ]} rehypePlugins={[ rehypeSlug ]} components={{
-                    'a': ({href, ref, ...props}: ComponentProps<'a'>) => <Link href={href || "#"} target={href && !href.startsWith('#') ? "_blank" : undefined} {...props} />
+                    'a': ({href, ref, ...props}: ComponentProps<'a'>) => <StyledLink href={href || "#"} target={href && !href.startsWith('#') ? "_blank" : undefined} {...props} />
                 }}>
                     {`# ${data.title}\n\n${data.content}`}
                 </ReactMarkdown>
