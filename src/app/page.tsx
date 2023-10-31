@@ -85,10 +85,10 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                         w-screen sm:w-auto top-0 -left-8 p-8 sm:p-0 h-screen sm:h-auto select-none z-10
                     ">
                         <XIcon size={32} className="sm:hidden cursor-pointer" key="xmarkicon"/>
-                        <NavLink title="Socials" href="#socials" icon={LinkIcon} />
-                        <NavLink title="Technologies" href="#stack" icon={WrenchIcon} />
-                        <NavLink title="Portfolio" href="#projects" icon={BriefcaseIcon} />
-                        <NavLink title="Blog" href="#blog" icon={PenIcon} />
+                        <NavLink title="Socials" href="#socials" icon={LinkIcon} hamburger />
+                        <NavLink title="Technologies" href="#stack" icon={WrenchIcon} hamburger />
+                        <NavLink title="Portfolio" href="#projects" icon={BriefcaseIcon} hamburger />
+                        <NavLink title="Blog" href="#blog" icon={PenIcon} hamburger />
                     </nav>
                 </label>
                 <ThemeToggle/>
