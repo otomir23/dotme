@@ -114,7 +114,8 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     I live in <MapPinIcon size={16} className="inline text-blue-600"/>{" "}
                     <span className="underline text-blue-600 cursor-help" title="Great city!">Moscow, Russia</span> and
                     I am a developer, designer and a very lazy person. I primary specialize in web design and
-                    development, but I also sometimes create Minecraft mods or Discord bots.
+                    development, but I also sometimes create Minecraft mods or Discord bots.{" "}
+                    <Link href="/blog/about-me" className="underline text-blue-600">{'-->'}</Link>
                 </p>
             </section>
             <HomeSection id="socials" title="Socials" icon={LinkIcon}>
