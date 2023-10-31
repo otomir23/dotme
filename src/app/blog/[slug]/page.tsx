@@ -47,7 +47,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
                     className="object-cover w-full aspect-[3/1] mb-4 rounded"
                 />}
                 <ReactMarkdown remarkPlugins={[ remarkGfm, remarkToc ]} components={{
-                    'a': ({href, ref, ...props}: ComponentProps<'a'>) => <Link href={href || "#"} target="_blank" {...props} />
+                    'a': ({href, ref, ...props}: ComponentProps<'a'>) => <Link href={href || "#"} target={href && !href.startsWith('#') ? "_blank" : undefined} {...props} />
                 }}>
                     {`# ${data.title}\n\n${data.content}`}
                 </ReactMarkdown>
