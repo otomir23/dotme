@@ -68,7 +68,7 @@ model BlogPost {
   slug     String   @unique
   image    String?
   postedAt DateTime @default(now())
-  content  String
+  content  String   @db.MediumText
   unlisted Boolean  @default(true)
 
   @@map("posts")
