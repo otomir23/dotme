@@ -8,6 +8,7 @@ import NavLink from "@/app/nav-link";
 import {HomeIcon} from "lucide-react";
 import remarkGfm from "remark-gfm";
 import remarkToc from "remark-toc";
+import rehypeSlug from "rehype-slug";
 import {ComponentProps} from "react";
 import Link from "next/link";
 
@@ -46,7 +47,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
                     src={data.image} alt={data.title} width={1024} height={256}
                     className="object-cover w-full aspect-[3/1] mb-4 rounded"
                 />}
-                <ReactMarkdown remarkPlugins={[ remarkGfm, remarkToc ]} components={{
+                <ReactMarkdown remarkPlugins={[ remarkGfm, remarkToc ]} rehypePlugins={[ rehypeSlug ]} components={{
                     'a': ({href, ref, ...props}: ComponentProps<'a'>) => <Link href={href || "#"} target={href && !href.startsWith('#') ? "_blank" : undefined} {...props} />
                 }}>
                     {`# ${data.title}\n\n${data.content}`}
