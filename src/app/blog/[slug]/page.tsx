@@ -1,16 +1,16 @@
 import {getBlogPost} from "@/util/data";
 import {notFound} from "next/navigation";
-import ThemeToggle from "@/app/theme-toggle";
+import ThemeToggle from "@/components/theme-toggle";
 import ReactMarkdown from 'react-markdown'
 import Image from "next/image";
-import DatabaseError from "@/app/database-error";
-import NavLink from "@/app/nav-link";
+import DatabaseError from "@/components/database-error";
+import NavLink from "@/components/nav-link";
 import {HomeIcon} from "lucide-react";
 import remarkGfm from "remark-gfm";
 import remarkToc from "remark-toc";
 import rehypeSlug from "rehype-slug";
 import {ComponentProps} from "react";
-import StyledLink from "@/app/styled-link";
+import StyledLink from "@/components/styled-link";
 
 export async function generateMetadata({ params: { slug } }: { params: { slug: string } }) {
     const data = await getBlogPost(slug);

@@ -1,5 +1,5 @@
-import ErrorBase from "@/app/error-base";
-import StyledLink from "@/app/styled-link";
+import ErrorBase from "@/components/error-base";
+import StyledLink from "@/components/styled-link";
 import {SearchXIcon} from "lucide-react";
 
 export const metadata = {

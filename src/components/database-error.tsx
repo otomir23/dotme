@@ -1,4 +1,4 @@
-import ErrorBase from "@/app/error-base";
+import ErrorBase from "@/components/error-base";
 
 export default function DatabaseError() {
     return <ErrorBase

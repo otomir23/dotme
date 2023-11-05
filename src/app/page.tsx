@@ -1,4 +1,4 @@
-import ThemeToggle from "@/app/theme-toggle";
+import ThemeToggle from "@/components/theme-toggle";
 import {
     AlertTriangle,
     BriefcaseIcon,
@@ -15,14 +15,14 @@ import avatar from "@/../public/avatar.jpg";
 import Link from "next/link";
 import {getBlogPosts, getNowPlaying, getProjects, getSocials, getStack} from "@/util/data";
 import { formatDistanceToNow } from 'date-fns';
-import DatabaseError from "@/app/database-error";
+import DatabaseError from "@/components/database-error";
 import {canonicalUrl, ServerSearchParams} from "@/util/util";
-import Anchor from "@/app/anchor";
-import Searchable from "@/app/searchable";
+import Anchor from "@/components/anchor";
+import Searchable from "@/components/searchable";
 import {Metadata} from "next";
 import HomeSection from "@/app/home-section";
-import NavLink from "@/app/nav-link";
-import StyledLink from "@/app/styled-link";
+import NavLink from "@/components/nav-link";
+import StyledLink from "@/components/styled-link";
 
 export const dynamic = 'force-dynamic'
 

@@ -1,6 +1,6 @@
 import {AlertOctagonIcon, LucideIcon} from "lucide-react";
 import {ReactNode} from "react";
-import StyledLink from "@/app/styled-link";
+import StyledLink from "@/components/styled-link";
 
 export type ErrorBaseProps = {
     icon?: LucideIcon,

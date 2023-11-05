@@ -1,6 +1,6 @@
 import {ReactNode} from "react";
 import {SearchXIcon} from "lucide-react";
-import SearchableClient, {SearchableClientProps} from "@/app/searchable-client";
+import SearchableClient, {SearchableClientProps} from "@/components/searchable-client";
 
 export type SearchableProps<T> = {
     data: T[],

@@ -1,6 +1,6 @@
 import {ReactNode} from "react";
 import {LucideIcon} from "lucide-react";
-import Anchor from "@/app/anchor";
+import Anchor from "@/components/anchor";
 
 export type HomeSectionProps = {
     children: ReactNode,
