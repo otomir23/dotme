@@ -39,13 +39,29 @@ export function generateMetadata({searchParams}: {searchParams: ServerSearchPara
     }
 }
 
-const load = async (searchParams: ServerSearchParams) => ({
-    socials: await getSocials(),
-    stack: await getStack(),
-    projects: await getProjects(searchParams['project'] || null, Number(searchParams['tool']) || null),
-    blog: await getBlogPosts(searchParams['post'] || null),
-    nowPlaying: await getNowPlaying(),
-})
+const load = async (searchParams: ServerSearchParams) => {
+    const [
+        socials,
+        stack,
+        projects,
+        blog,
+        nowPlaying,
+    ] = await Promise.all([
+        getSocials(),
+        getStack(),
+        getProjects(searchParams['project'] || null, Number(searchParams['tool']) || null),
+        getBlogPosts(searchParams['post'] || null),
+        getNowPlaying(),
+    ])
+
+    return {
+        socials,
+        stack,
+        projects,
+        blog,
+        nowPlaying,
+    }
+}
 
 export default async function Home({searchParams}: {searchParams: ServerSearchParams}) {
     const pageData = await load(searchParams).catch(e => {
@@ -67,7 +83,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
         .map(c => c.tools)
         .flat()
         .find(t => String(t.id) === tool)
-        || null
+        || null;
 
     return (
         <>
