@@ -244,7 +244,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     property="post"
                     placeholder="Find posts..."
                     data={blog}
-                    plural="blog pots"
+                    plural="posts"
                     skeleton={<div className="rounded-lg bg-neutral-200 dark:bg-neutral-800 animate-pulse h-72" />}
                 >
                     {(post) => (
