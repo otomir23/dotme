@@ -300,7 +300,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                             </h5>
                         </figcaption>
                     </Link>:
-                    <p className="animate-pulse">Nothing right now</p>
+                    <p className="animate-pulse">Nothing right now. <StyledLink href="/s/lastfm">View Profile {'-->'}</StyledLink></p>
                 }
                 <Link className="absolute right-2 bottom-2 text-xs" href="https://last.fm" target="_blank">
                     Powered by Last.fm
