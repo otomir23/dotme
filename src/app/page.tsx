@@ -295,9 +295,9 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                     </Link>:
                     <p className="animate-pulse">Nothing right now. <StyledLink href="/s/lastfm">View Profile {'-->'}</StyledLink></p>
                 }
-                <Link className="absolute right-2 bottom-2 text-xs" href="https://last.fm" target="_blank">
+                <StyledLink className="absolute right-2 bottom-2 text-xs" href="https://last.fm" target="_blank">
                     Powered by Last.fm
-                </Link>
+                </StyledLink>
             </section>
             <noscript>
                 <p className="mt-4 sm:mt-8">

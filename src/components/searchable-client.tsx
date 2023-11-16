@@ -37,7 +37,11 @@ export default function SearchableClient({property, placeholder = "", children, 
                         placeholder:text-neutral-400 dark:placeholder:text-neutral-600"
                         placeholder={placeholder}
                     />
-                    <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2">
+                    <button
+                        type="submit"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 focus:outline-none focus:scale-125 transition-transform"
+                        aria-label={placeholder}
+                    >
                         <SearchIcon size={16} />
                     </button>
                 </form>
