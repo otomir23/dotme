@@ -23,6 +23,7 @@ import {Metadata} from "next";
 import HomeSection from "@/app/home-section";
 import NavLink from "@/components/nav-link";
 import StyledLink from "@/components/styled-link";
+import {LinkButton} from "@/components/button";
 
 export const dynamic = 'force-dynamic'
 
@@ -137,20 +138,12 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             <HomeSection id="socials" title="Socials" icon={LinkIcon}>
                 <div className="flex flex-row gap-4 mt-4 sm:mt-8 flex-wrap">
                     {socials.map((social) => (
-                        <Link
-                            href={social.link} key={social.name}
-                            className="rounded-md p-2 border-2 bg-neutral-100 border-neutral-200 text-neutral-900
-                            dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-100 fill-current flex
-                            justify-center items-center focus:outline-none focus:ring ring-neutral-100
-                            dark:ring-neutral-900"
-                            target="_blank"
-                            title={social.name}
-                        >
+                        <LinkButton href={social.link} key={social.name} target="_blank" title={social.name} aria-label={`Visit my ${social.name}`}>
                             <Image
                                 src={social.icon} alt={social.name} width={20} height={20}
                                 className="w-5 h-5 brightness-0 dark:invert"
                             />
-                        </Link>
+                        </LinkButton>
                     ))}
                 </div>
             </HomeSection>
