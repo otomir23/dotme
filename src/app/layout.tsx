@@ -12,7 +12,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html lang="en" className="scroll-smooth">
             <head />
-            <body className={`${inter.className} dark:bg-neutral-950 bg-white`}>
+            <body className={`${inter.className} dark:bg-neutral-950 bg-white dark:text-white`}>
                 <Providers>
                     <main className="max-w-4xl mx-auto px-8 pb-8">
                         {children}
