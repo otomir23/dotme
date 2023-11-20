@@ -287,9 +287,10 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
                             </div>
                         }
                         <figcaption className="sm:py-2">
-                            <h4 className="text-2xl">{nowPlaying.name}</h4>
+                            <h4 className="text-2xl font-bold">{nowPlaying.name}</h4>
                             <h5 className="text-lg">
-                                <span className="text-red-800 dark:text-red-200">by</span> {nowPlaying.artist.name}
+                                <span className="text-red-800 dark:text-red-200">by</span>{" "}
+                                <span className="font-medium">{nowPlaying.artist.name}</span>
                             </h5>
                         </figcaption>
                     </Link>:
