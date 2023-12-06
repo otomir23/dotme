@@ -14,7 +14,11 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
             <head />
             <body className={`${inter.className} dark:bg-neutral-950 bg-white dark:text-white`}>
                 <Providers>
-                    <main className="max-w-4xl mx-auto px-8 pb-8">
+                    <main
+                        className="max-w-4xl mx-auto px-8 pb-8
+                        selection:bg-neutral-300 selection:text-black
+                        dark:selection:bg-neutral-700 dark:selection:text-white"
+                    >
                         {children}
                     </main>
                 </Providers>
