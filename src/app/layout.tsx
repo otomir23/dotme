@@ -4,6 +4,7 @@ import {Inter} from 'next/font/google'
 import React from "react";
 import Providers from "@/app/providers";
 import {Metadata} from "next";
+import Script from 'next/script';
 
 const inter = Inter({subsets: ['latin']})
 
@@ -12,6 +13,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html lang="en" className="scroll-smooth">
             <head />
+            {process.env.UMAMI_WEBSITE_ID && <Script src="https://us.umami.is/script.js" data-website-id={process.env.UMAMI_WEBSITE_ID} />}
             <body className={`${inter.className} dark:bg-neutral-950 bg-white dark:text-white`}>
                 <Providers>
                     <main
