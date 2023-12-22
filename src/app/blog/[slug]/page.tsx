@@ -16,9 +16,21 @@ export async function generateMetadata({ params: { slug } }: { params: { slug: s
     const data = await getBlogPost(slug);
     if (!data) notFound()
 
+    const description = (data.content.split("\n\n")[0] ?? "").replace("\n", " ").trim();
+
     return {
         title: data.title,
-        description: data.content
+        description: description,
+        openGraph: {
+            title: data.title,
+            description: description,
+            images: data.image ? [
+                {
+                    url: data.image
+                },
+            ] : undefined,
+            type: "article",
+        },
     }
 }
 
