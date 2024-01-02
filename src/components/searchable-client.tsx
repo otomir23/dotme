@@ -5,6 +5,7 @@ import {ReactNode, useEffect, useState} from "react";
 import {SearchIcon} from "lucide-react";
 
 export type SearchableClientProps = {
+    initialValue?: string,
     property: string,
     placeholder?: string,
     children: ReactNode,
@@ -12,7 +13,9 @@ export type SearchableClientProps = {
     aside?: ReactNode
 }
 
-export default function SearchableClient({property, placeholder = "", children, skeleton, aside}: SearchableClientProps) {
+export default function SearchableClient(
+    { initialValue, property, placeholder = "", children, skeleton, aside }: SearchableClientProps
+) {
     const router = useRouter()
     const [transition, setTransition] = useState(false)
     const searchParams = useSearchParams()
@@ -36,6 +39,7 @@ export default function SearchableClient({property, placeholder = "", children, 
                         py-2 px-4 rounded-lg appearance-none w-full focus:outline-none focus:ring ring-neutral-100 dark:ring-neutral-900
                         placeholder:text-neutral-400 dark:placeholder:text-neutral-600"
                         placeholder={placeholder}
+                        defaultValue={initialValue}
                     />
                     <button
                         type="submit"

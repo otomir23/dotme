@@ -174,6 +174,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             </HomeSection>
             <HomeSection id="projects" title="Portfolio" icon={BriefcaseIcon}>
                 <Searchable
+                    initialValue={searchParams['project']}
                     data={projects}
                     plural="projects"
                     property="project"
@@ -234,6 +235,7 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             </HomeSection>
             <HomeSection id="blog" title="Blog" icon={PenIcon}>
                 <Searchable
+                    initialValue={searchParams['post']}
                     property="post"
                     placeholder="Find posts..."
                     data={blog}
