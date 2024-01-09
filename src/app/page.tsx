@@ -138,7 +138,14 @@ export default async function Home({searchParams}: {searchParams: ServerSearchPa
             <HomeSection id="socials" title="Socials" icon={LinkIcon}>
                 <div className="flex flex-row gap-4 mt-4 sm:mt-8 flex-wrap">
                     {socials.map((social) => (
-                        <LinkButton href={social.link} key={social.name} target="_blank" title={social.name} aria-label={`Visit my ${social.name}`}>
+                        <LinkButton
+                            href={social.link}
+                            key={social.name}
+                            target="_blank"
+                            title={social.name}
+                            aria-label={`Visit my ${social.name}`}
+                            rel="me"
+                        >
                             <Image
                                 src={social.icon} alt={social.name} width={20} height={20}
                                 className="w-5 h-5 brightness-0 dark:invert"
