@@ -1,23 +1,23 @@
-import db from "@/util/db";
-import SimpleFM from '@solely/simple-fm';
+import db from "@/util/db"
+import SimpleFM from "@solely/simple-fm"
 
 export async function getSocials() {
-    return db.social.findMany();
+    return db.social.findMany()
 }
 
 export async function getSocial(name: string) {
     return db.social.findFirst({
         where: {
-            name
-        }
-    });
+            name,
+        },
+    })
 }
 
 export async function getStack() {
     return db.toolCategory.findMany({
         include: {
-            tools: true
-        }
+            tools: true,
+        },
     })
 }
 
@@ -28,89 +28,89 @@ export async function getProjects(query: string | null = "", toolId: number | nu
                 OR: [
                     {
                         name: {
-                            contains: query
-                        }
+                            contains: query,
+                        },
                     },
                     {
                         tools: {
                             some: {
                                 tool: {
                                     name: {
-                                        contains: query
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ]
+                                        contains: query,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                ],
             }),
             ...(toolId !== null && {
                 tools: {
                     some: {
-                        toolId: toolId
-                    }
-                }
-            })
+                        toolId: toolId,
+                    },
+                },
+            }),
         },
         orderBy: [
             {
-                releasedAt: 'desc'
-            }
+                releasedAt: "desc",
+            },
         ],
         include: {
             tools: {
                 include: {
-                    tool: true
-                }
-            }
-        }
-    });
+                    tool: true,
+                },
+            },
+        },
+    })
 }
 
 export async function getBlogPosts(query: string | null = "") {
     return db.blogPost.findMany({
         where: {
             unlisted: {
-                equals: false
+                equals: false,
             },
             ...(query && {
                 OR: [
                     {
                         title: {
-                            contains: query
-                        }
+                            contains: query,
+                        },
                     },
                     {
                         content: {
-                            contains: query
-                        }
+                            contains: query,
+                        },
                     },
                     {
                         slug: {
-                            contains: query
-                        }
-                    }
-                ]
+                            contains: query,
+                        },
+                    },
+                ],
             }),
         },
         orderBy: [
             {
-                postedAt: 'desc'
-            }
-        ]
-    });
+                postedAt: "desc",
+            },
+        ],
+    })
 }
 
 export async function getBlogPost(slug: string) {
     return db.blogPost.findFirst({
         where: {
-            slug
-        }
-    });
+            slug,
+        },
+    })
 }
 
 export async function getNowPlaying() {
-    const lastFm = new SimpleFM(process.env.LASTFM_API_KEY || "");
+    const lastFm = new SimpleFM(process.env.LASTFM_API_KEY || "")
     const data = await lastFm.user.getRecentTracks({
         username: process.env.LASTFM_USERNAME || "",
     })

@@ -1,22 +1,24 @@
-import {getBlogPost} from "@/util/data";
-import {notFound} from "next/navigation";
-import ThemeToggle from "@/components/theme-toggle";
-import ReactMarkdown from 'react-markdown'
-import Image from "next/image";
-import DatabaseError from "@/components/database-error";
-import NavLink from "@/components/nav-link";
-import {HomeIcon} from "lucide-react";
-import remarkGfm from "remark-gfm";
-import remarkToc from "remark-toc";
-import rehypeSlug from "rehype-slug";
-import {ComponentProps} from "react";
-import StyledLink from "@/components/styled-link";
+import { getBlogPost } from "@/util/data"
+import { notFound } from "next/navigation"
+import ThemeToggle from "@/components/theme-toggle"
+import ReactMarkdown from "react-markdown"
+import Image from "next/image"
+import DatabaseError from "@/components/database-error"
+import NavLink from "@/components/nav-link"
+import { HomeIcon } from "lucide-react"
+import remarkGfm from "remark-gfm"
+import remarkToc from "remark-toc"
+import rehypeSlug from "rehype-slug"
+import { ComponentProps } from "react"
+import StyledLink from "@/components/styled-link"
 
 export async function generateMetadata({ params: { slug } }: { params: { slug: string } }) {
-    const data = await getBlogPost(slug);
+    const data = await getBlogPost(slug)
     if (!data) notFound()
 
-    const description = (data.content.split("\n\n")[0] ?? "").replace("\n", " ").trim();
+    const description = (data.content.split("\n\n")[0] ?? "")
+        .replace("\n", " ")
+        .trim()
 
     return {
         title: data.title,
@@ -26,7 +28,7 @@ export async function generateMetadata({ params: { slug } }: { params: { slug: s
             description: description,
             images: data.image ? [
                 {
-                    url: data.image
+                    url: data.image,
                 },
             ] : undefined,
             type: "article",
@@ -35,17 +37,17 @@ export async function generateMetadata({ params: { slug } }: { params: { slug: s
 }
 
 export default async function BlogPost({ params: { slug } }: { params: { slug: string } }) {
-    const data = await getBlogPost(slug).catch(e => {
-        console.error(e);
-        return "error" as const;
-    });
+    const data = await getBlogPost(slug).catch((e) => {
+        console.error(e)
+        return "error" as const
+    })
 
     if (!data) {
-        console.log(`No blog post found for slug: ${slug}`);
-        notFound();
+        console.log(`No blog post found for slug: ${slug}`)
+        notFound()
     }
 
-    if (data === 'error')
+    if (data === "error")
         return <DatabaseError />
 
     return (
@@ -55,16 +57,31 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
                 <ThemeToggle />
             </nav>
             <article className="prose prose-neutral dark:prose-invert prose-img:rounded w-full max-w-none">
-                {data.image && <Image
-                    src={data.image} alt={data.title} width={1024} height={256}
-                    className="object-cover w-full aspect-[3/1] mb-4 rounded"
-                />}
-                <ReactMarkdown remarkPlugins={[ remarkGfm, remarkToc ]} rehypePlugins={[ rehypeSlug ]} components={{
-                    'a': ({href, ref, ...props}: ComponentProps<'a'>) => <StyledLink href={href || "#"} target={href && !href.startsWith('#') ? "_blank" : undefined} {...props} />
-                }}>
+                {data.image && (
+                    <Image
+                        src={data.image}
+                        alt={data.title}
+                        width={1024}
+                        height={256}
+                        className="object-cover w-full aspect-[3/1] mb-4 rounded"
+                    />
+                )}
+                <ReactMarkdown
+                    remarkPlugins={[remarkGfm, remarkToc]}
+                    rehypePlugins={[rehypeSlug]}
+                    components={{
+                        a: ({ href, ref: _, ...props }: ComponentProps<"a">) => (
+                            <StyledLink
+                                href={href || "#"}
+                                target={href && !href.startsWith("#") ? "_blank" : undefined}
+                                {...props}
+                            />
+                        ),
+                    }}
+                >
                     {`# ${data.title}\n\n${data.content}`}
                 </ReactMarkdown>
             </article>
         </div>
-    );
+    )
 }

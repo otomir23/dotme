@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next'
-import {canonicalUrl} from "@/util/util";
-import {getBlogPosts} from "@/util/data";
+import { MetadataRoute } from "next"
+import { canonicalUrl } from "@/util/util"
+import { getBlogPosts } from "@/util/data"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await getBlogPosts()
@@ -8,13 +8,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [
         {
             url: `${canonicalUrl}/`,
-            changeFrequency: 'weekly',
+            changeFrequency: "weekly",
             priority: 1,
         },
-        ...posts.map(({slug}) => ({
+        ...posts.map(({ slug }) => ({
             url: `${canonicalUrl}/blog/${slug}`,
-            changeFrequency: 'monthly' as const,
-            priority: 0.6
-        }))
+            changeFrequency: "monthly" as const,
+            priority: 0.6,
+        })),
     ]
 }

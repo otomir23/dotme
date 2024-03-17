@@ -1,22 +1,24 @@
-import {AlertOctagonIcon, LucideIcon} from "lucide-react";
-import {ReactNode} from "react";
-import StyledLink from "@/components/styled-link";
+import { AlertOctagonIcon, LucideIcon } from "lucide-react"
+import { ReactNode } from "react"
+import StyledLink from "@/components/styled-link"
 
 export type ErrorBaseProps = {
     icon?: LucideIcon,
     title?: string,
-    children?: ReactNode
+    children?: ReactNode,
 }
 
 export default function ErrorBase(
     {
         icon: Icon = AlertOctagonIcon,
         title = "Unknown error",
-        children: description = (<>
-            Please{' '}
-            <StyledLink href="https://t.me/otomir23">contact me</StyledLink>{' '}
-            to resolve the issue.
-        </>)
+        children: description = (
+            <>
+                Please{" "}
+                <StyledLink href="https://t.me/otomir23">contact me</StyledLink>{" "}
+                to resolve the issue.
+            </>
+        ),
     }: ErrorBaseProps
 ) {
     return (
