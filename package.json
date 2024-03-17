@@ -31,13 +31,15 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^1.7.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "18.11.18",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
     "autoprefixer": "^10.4.13",
     "dotenv-cli": "^7.2.1",
-    "eslint": "^8.49.0",
+    "eslint": "^8.56.0",
     "eslint-config-next": "13.4.19",
     "postcss": "^8.4.21",
     "prisma": "^5.2.0",
