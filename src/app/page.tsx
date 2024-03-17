@@ -16,7 +16,7 @@ import Link from "next/link"
 import { getBlogPosts, getNowPlaying, getProjects, getSocials, getStack } from "@/util/data"
 import { formatDistanceToNow } from "date-fns"
 import DatabaseError from "@/components/database-error"
-import { canonicalUrl, ServerSearchParams } from "@/util/util"
+import { ServerSearchParams } from "@/util/util"
 import Anchor from "@/components/anchor"
 import Searchable from "@/components/searchable"
 import { Metadata } from "next"
@@ -24,12 +24,13 @@ import HomeSection from "@/app/home-section"
 import NavLink from "@/components/nav-link"
 import StyledLink from "@/components/styled-link"
 import { LinkButton } from "@/components/button"
+import { env } from "@/env.mjs"
 
 export const dynamic = "force-dynamic"
 
 export function generateMetadata({ searchParams }: { searchParams: ServerSearchParams }): Metadata {
     return {
-        metadataBase: new URL(canonicalUrl),
+        metadataBase: new URL(env.CANONICAL_URL),
         robots: {
             // Hide filtered versions from search
             index: Object.entries(searchParams).length === 0,
