@@ -4,22 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "dotenv -c -- prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:dev": "dotenv -c -- prisma migrate dev",
-    "db:push": "dotenv -c -- prisma db push",
-    "migrate:reset": "dotenv -c -- prisma migrate reset",
-    "db:seed": "dotenv -c -- prisma db seed",
-    "prisma:generate": "dotenv -c -- prisma generate",
-    "prisma:studio": "dotenv -c -- prisma studio"
+    "db:push": "dotenv -c development -- drizzle-kit push:pg",
+    "db:studio": "dotenv -c development -- drizzle-kit studio"
   },
   "dependencies": {
-    "@prisma/client": "^5.2.0",
     "@solely/simple-fm": "^1.5.3",
     "@t3-oss/env-nextjs": "^0.7.3",
+    "@vercel/postgres": "^0.7.2",
     "cva": "^1.0.0-beta.1",
     "date-fns": "^2.30.0",
+    "drizzle-orm": "^0.30.2",
     "lucide-react": "^0.276.0",
     "next": "^14.0.0",
     "next-themes": "^0.2.1",
@@ -41,10 +38,11 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "autoprefixer": "^10.4.13",
     "dotenv-cli": "^7.2.1",
+    "drizzle-kit": "^0.20.14",
     "eslint": "^8.56.0",
     "eslint-config-next": "13.4.19",
+    "pg": "^8.11.3",
     "postcss": "^8.4.21",
-    "prisma": "^5.2.0",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.2.2"
   }

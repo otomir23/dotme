@@ -9,7 +9,7 @@ export const env = createEnv({
                 : `http://localhost:${process.env.PORT || 3000}`),
             z.string().url()
         ),
-        DATABASE_URL: z.string().url(),
+        POSTGRES_URL: z.string().url(),
         LASTFM_API_KEY: z.string().length(32),
         LASTFM_USERNAME: z.string(),
         UMAMI_WEBSITE_ID: z.string().uuid().optional(),

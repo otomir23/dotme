@@ -1,19 +1,5 @@
-import { PrismaClient } from "@prisma/client"
+import { drizzle } from "drizzle-orm/vercel-postgres"
+import { sql } from "@vercel/postgres"
+import * as schema from "@/util/schema"
 
-declare global {
-    // eslint-disable-next-line no-var
-    var prisma: PrismaClient
-}
-
-function getPrisma(): PrismaClient {
-    if (process.env.NODE_ENV === "production") {
-        return new PrismaClient()
-    } else {
-        if (!global.prisma) {
-            global.prisma = new PrismaClient()
-        }
-        return global.prisma
-    }
-}
-
-export default getPrisma()
+export const db = drizzle(sql, { schema })

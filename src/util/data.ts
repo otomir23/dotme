@@ -1,75 +1,65 @@
-import db from "@/util/db"
+import { db } from "@/util/db"
 import SimpleFM from "@solely/simple-fm"
 import { env } from "@/env.mjs"
+import { projectsToTools } from "@/util/schema"
 
 export async function getSocials() {
-    return db.social.findMany()
+    return db.query.socials.findMany()
 }
 
 export async function getSocial(name: string) {
-    return db.social.findFirst({
-        where: {
-            name,
-        },
+    return db.query.socials.findFirst({
+        where: (socials, { sql, eq }) => eq(sql`lower(${socials.name})`, name.toLowerCase()),
     })
 }
 
 export async function getStack() {
-    return db.toolCategory.findMany({
-        include: {
+    return db.query.toolCategories.findMany({
+        with: {
             tools: true,
         },
     })
 }
 
 export async function getProjects(query: string | null = "", toolId: number | null = null) {
-    return db.project.findMany({
-        where: {
-            ...(query && {
-                OR: [
-                    {
-                        name: {
-                            contains: query,
-                        },
-                    },
-                    {
-                        tools: {
-                            some: {
-                                tool: {
-                                    name: {
-                                        contains: query,
-                                    },
-                                },
-                            },
-                        },
-                    },
-                ],
-            }),
-            ...(toolId !== null && {
-                tools: {
-                    some: {
-                        toolId: toolId,
-                    },
-                },
-            }),
-        },
-        orderBy: [
-            {
-                releasedAt: "desc",
-            },
-        ],
-        include: {
+    return db.query.projects.findMany({
+        with: {
             tools: {
-                include: {
+                with: {
                     tool: true,
                 },
             },
         },
+        orderBy: (projects, { desc }) => [desc(projects.releasedAt)],
+        where: (projects, { ilike, inArray, and, or, eq }) => and(
+            or(
+                ilike(projects.name, `%${query ?? ""}%`),
+                ilike(projects.description, `%${query ?? ""}%`),
+            ),
+            toolId !== null ? inArray(
+                projects.id,
+                db
+                    .select({ id: projectsToTools.projectId })
+                    .from(projectsToTools)
+                    .where(eq(projectsToTools.toolId, toolId))
+            ) : undefined,
+        ),
     })
 }
 
 export async function getBlogPosts(query: string | null = "") {
-    return db.blogPost.findMany({
+    return db.query.blogPosts.findMany({
+        orderBy: (blogPosts, { desc }) => [desc(blogPosts.postedAt)],
+        where: (blogPosts, { and, ilike, or, eq }) => and(
+            eq(blogPosts.unlisted, false),
+            or(
+                ilike(blogPosts.title, `%${query ?? ""}%`),
+                ilike(blogPosts.content, `%${query ?? ""}%`),
+                ilike(blogPosts.slug, `%${query ?? ""}%`),
+            ),
+        ),
+    })
+    /* return db.blogPost.findMany({
         where: {
             unlisted: {
                 equals: false,
@@ -99,14 +89,12 @@ export async function getBlogPosts(query: string | null = "") {
                 postedAt: "desc",
             },
         ],
-    })
+    }) */
 }
 
 export async function getBlogPost(slug: string) {
-    return db.blogPost.findFirst({
-        where: {
-            slug,
-        },
+    return db.query.blogPosts.findFirst({
+        where: (blogPosts, { eq, sql }) => eq(sql`lower(${blogPosts.slug})`, slug.toLowerCase()),
     })
 }
 
