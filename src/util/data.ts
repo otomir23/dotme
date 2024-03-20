@@ -59,37 +59,6 @@ export async function getBlogPosts(query: string | null = "") {
             ),
         ),
     })
-    /* return db.blogPost.findMany({
-        where: {
-            unlisted: {
-                equals: false,
-            },
-            ...(query && {
-                OR: [
-                    {
-                        title: {
-                            contains: query,
-                        },
-                    },
-                    {
-                        content: {
-                            contains: query,
-                        },
-                    },
-                    {
-                        slug: {
-                            contains: query,
-                        },
-                    },
-                ],
-            }),
-        },
-        orderBy: [
-            {
-                postedAt: "desc",
-            },
-        ],
-    }) */
 }
 
 export async function getBlogPost(slug: string) {
