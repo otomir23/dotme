@@ -13,6 +13,7 @@ export const env = createEnv({
         LASTFM_API_KEY: z.string().length(32),
         LASTFM_USERNAME: z.string(),
         UMAMI_WEBSITE_ID: z.string().uuid().optional(),
+        WEBRING_ID: z.coerce.number().optional(),
     },
     client: {},
     experimental__runtimeEnv: {},

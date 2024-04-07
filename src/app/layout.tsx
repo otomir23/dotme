@@ -6,6 +6,7 @@ import Providers from "@/app/providers"
 import { Metadata } from "next"
 import Script from "next/script"
 import { env } from "@/env.mjs"
+import WebringNav from "@/components/webring-nav"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     >
                         {children}
                     </main>
+                    <WebringNav />
                 </Providers>
             </body>
         </html>
