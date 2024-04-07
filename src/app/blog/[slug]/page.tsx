@@ -1,4 +1,4 @@
-import { getBlogPost } from "@/util/data"
+import { getBlogPost } from "@/data"
 import { notFound } from "next/navigation"
 import ThemeToggle from "@/components/theme-toggle"
 import ReactMarkdown from "react-markdown"

@@ -1,4 +1,4 @@
-import { getSocial } from "@/util/data"
+import { getSocial } from "@/data"
 import { notFound, redirect } from "next/navigation"
 
 export default async function Social({ params: { name } }: { params: { name: string } }) {

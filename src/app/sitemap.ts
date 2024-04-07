@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next"
-import { getBlogPosts } from "@/util/data"
+import { getBlogPosts } from "@/data"
 import { env } from "@/env.mjs"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

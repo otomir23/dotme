@@ -1,7 +1,7 @@
-import { db } from "@/util/db"
+import { db } from "@/data/db"
 import SimpleFM from "@solely/simple-fm"
 import { env } from "@/env.mjs"
-import { projectsToTools } from "@/util/schema"
+import { projectsToTools } from "@/data/db/schema"
 
 export async function getSocials() {
     return db.query.socials.findMany()
