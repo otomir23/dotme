@@ -14,7 +14,9 @@ export default function WebringNav() {
             <Link href={`/webring/${webringId}/prev`}>
                 {"<-- Prev"}
             </Link>
-            <p>My Webring</p>
+            <Link href="/webring/">
+                My Webring
+            </Link>
             <Link href={`/webring/${webringId}/next`}>
                 {"Next -->"}
             </Link>
