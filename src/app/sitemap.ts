@@ -11,6 +11,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: "weekly",
             priority: 1,
         },
+        {
+            url: `${env.CANONICAL_URL}/webring/`,
+            changeFrequency: "weekly",
+            priority: 0.7,
+        },
         ...posts.map(({ slug }) => ({
             url: `${env.CANONICAL_URL}/blog/${slug}`,
             changeFrequency: "monthly" as const,
