@@ -3,6 +3,8 @@ import Link from "next/link"
 import { FlowerIcon } from "lucide-react"
 import ThemeToggle from "@/components/theme-toggle"
 
+export const revalidate = 300
+
 export const metadata = {
     title: "My Webring",
     description: "This is a list of websites that are a part of my Webring. Contact me to join!",
