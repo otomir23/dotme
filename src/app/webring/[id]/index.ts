@@ -1,9 +1,11 @@
 import { getWebringSite, getWholeWebring } from "@/data/webring"
+import { corsHeaders } from "@/util"
 
 export function getHandler(offset: number) {
     return async function GET(_: Request, { params: { id } }: { params: { id: string } }) {
         const site = await getWebringSite(+id, offset)
-        if (site === null) return new Response("Website is not part of my Webring", { status: 404 })
+        if (site === null)
+            return new Response("Website is not part of my Webring", { status: 404, headers: corsHeaders })
         return Response.redirect(site)
     }
 }

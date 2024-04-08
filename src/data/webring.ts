@@ -14,9 +14,9 @@ export async function getWebringSiteData(id: number) {
     const i = sites.findIndex(s => s.id === id)
     if (i === -1) return null
     return {
-        prev: sites.at((i - 1) % sites.length),
-        curr: sites.at(i % sites.length),
-        next: sites.at((i + 1) % sites.length),
+        prev: sites.at((i - 1) % sites.length)!,
+        curr: sites.at(i % sites.length)!,
+        next: sites.at((i + 1) % sites.length)!,
     }
 }
 
