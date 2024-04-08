@@ -22,7 +22,7 @@ export default function ErrorBase(
     }: ErrorBaseProps
 ) {
     return (
-        <div className="mx-auto mt-32 text-center max-w-md w-full">
+        <div className="mx-auto pt-32 text-center max-w-md w-full">
             <Icon size={32} className="inline mb-4" />
             <h1 className="text-2xl font-bold">{title}</h1>
             <p>{description}</p>
