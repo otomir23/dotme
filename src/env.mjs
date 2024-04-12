@@ -12,6 +12,7 @@ export const env = createEnv({
         POSTGRES_URL: z.string().url(),
         LASTFM_API_KEY: z.string().length(32),
         LASTFM_USERNAME: z.string(),
+        UMAMI_SCRIPT_URL: z.string().url().default("https://us.umami.is/script.js"),
         UMAMI_WEBSITE_ID: z.string().uuid().optional(),
         WEBRING_ID: z.coerce.number().optional(),
     },

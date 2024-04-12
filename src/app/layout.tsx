@@ -15,8 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" className="scroll-smooth">
             <head />
-            {env.UMAMI_WEBSITE_ID && (
-                <Script src="https://us.umami.is/script.js" data-website-id={env.UMAMI_WEBSITE_ID} />
+            {env.UMAMI_SCRIPT_URL && env.UMAMI_WEBSITE_ID && (
+                <Script src={env.UMAMI_SCRIPT_URL} data-website-id={env.UMAMI_WEBSITE_ID} />
             )}
             <body className={`${inter.className} dark:bg-neutral-950 bg-white dark:text-white`}>
                 <Providers>
