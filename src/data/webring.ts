@@ -1,4 +1,6 @@
 import { db } from "@/data/db"
+import { unstable_cache } from "next/cache"
+import { databaseRevalidationTag, databaseRevalidationTime } from "@/data/index"
 
 export async function getWebringSite(id: number, offset: number) {
     const sites = await getWholeWebring()
@@ -20,8 +22,11 @@ export async function getWebringSiteData(id: number) {
     }
 }
 
-export async function getWholeWebring() {
+export const getWholeWebring = unstable_cache(async () => {
     return db.query.webringSites.findMany({
         orderBy: (sites, { asc }) => asc(sites.id),
     })
-}
+}, ["webring"], {
+    revalidate: databaseRevalidationTime,
+    tags: [databaseRevalidationTag],
+})

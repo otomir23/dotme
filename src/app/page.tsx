@@ -15,7 +15,6 @@ import avatar from "@/../public/avatar.jpg"
 import Link from "next/link"
 import { getBlogPosts, getNowPlaying, getProjects, getSocials, getStack } from "@/data"
 import { formatDistanceToNow } from "date-fns"
-import DatabaseError from "@/components/database-error"
 import { ServerSearchParams } from "@/util"
 import Anchor from "@/components/anchor"
 import Searchable from "@/components/searchable"
@@ -25,8 +24,6 @@ import NavLink from "@/components/nav-link"
 import StyledLink from "@/components/styled-link"
 import { LinkButton } from "@/components/button"
 import { env } from "@/env.mjs"
-
-export const dynamic = "force-dynamic"
 
 export function generateMetadata({ searchParams }: { searchParams: ServerSearchParams }): Metadata {
     return {
@@ -66,12 +63,7 @@ const load = async (searchParams: ServerSearchParams) => {
 }
 
 export default async function Home({ searchParams }: { searchParams: ServerSearchParams }) {
-    const pageData = await load(searchParams).catch((e) => {
-        console.error(e)
-        return null
-    })
-    if (!pageData)
-        return <DatabaseError />
+    const pageData = await load(searchParams)
     const {
         socials,
         stack,
@@ -236,7 +228,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                                 {project.description}
                             </p>
                             <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm">
-                                {formatDistanceToNow(project.releasedAt)} ago
+                                {formatDistanceToNow(new Date(project.releasedAt))} ago
                             </p>
                             <div className="flex flex-row gap-2 flex-wrap mt-2">
                                 {project.tools.map(({ tool }) => (
@@ -288,7 +280,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                                     {post.title}
                                 </h3>
                                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-md break-words">
-                                    {formatDistanceToNow(post.postedAt)} ago
+                                    {formatDistanceToNow(new Date(post.postedAt))} ago
                                 </p>
                             </div>
                         </Link>

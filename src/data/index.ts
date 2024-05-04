@@ -2,26 +2,39 @@ import { db } from "@/data/db"
 import SimpleFM from "@solely/simple-fm"
 import { env } from "@/env.mjs"
 import { projectsToTools } from "@/data/db/schema"
+import { unstable_cache } from "next/cache"
 
-export async function getSocials() {
+export const databaseRevalidationTag = "*"
+export const databaseRevalidationTime = 43200 // 12 hours
+
+export const getSocials = unstable_cache(async () => {
     return db.query.socials.findMany()
-}
+}, ["socials"], {
+    revalidate: databaseRevalidationTime,
+    tags: [databaseRevalidationTag],
+})
 
-export async function getSocial(name: string) {
+export const getSocial = unstable_cache(async (name: string) => {
     return db.query.socials.findFirst({
         where: (socials, { sql, eq }) => eq(sql`lower(${socials.name})`, name.toLowerCase()),
     })
-}
+}, ["social"], {
+    revalidate: databaseRevalidationTime,
+    tags: [databaseRevalidationTag],
+})
 
-export async function getStack() {
+export const getStack = unstable_cache(async () => {
     return db.query.toolCategories.findMany({
         with: {
             tools: true,
         },
     })
-}
+}, ["stack"], {
+    revalidate: databaseRevalidationTime,
+    tags: [databaseRevalidationTag],
+})
 
-export async function getProjects(query: string | null = "", toolId: number | null = null) {
+export const getProjects = unstable_cache(async (query: string | null = "", toolId: number | null = null) => {
     return db.query.projects.findMany({
         with: {
             tools: {
@@ -45,9 +58,12 @@ export async function getProjects(query: string | null = "", toolId: number | nu
             ) : undefined,
         ),
     })
-}
+}, ["projects"], {
+    revalidate: databaseRevalidationTime,
+    tags: [databaseRevalidationTag],
+})
 
-export async function getBlogPosts(query: string | null = "") {
+export const getBlogPosts = unstable_cache(async (query: string | null = "") => {
     return db.query.blogPosts.findMany({
         orderBy: (blogPosts, { desc }) => [desc(blogPosts.postedAt)],
         where: (blogPosts, { and, ilike, or, eq }) => and(
@@ -59,13 +75,19 @@ export async function getBlogPosts(query: string | null = "") {
             ),
         ),
     })
-}
+}, ["posts"], {
+    revalidate: databaseRevalidationTime,
+    tags: [databaseRevalidationTag],
+})
 
-export async function getBlogPost(slug: string) {
+export const getBlogPost = unstable_cache(async (slug: string) => {
     return db.query.blogPosts.findFirst({
         where: (blogPosts, { eq, sql }) => eq(sql`lower(${blogPosts.slug})`, slug.toLowerCase()),
     })
-}
+}, ["post"], {
+    revalidate: databaseRevalidationTime,
+    tags: [databaseRevalidationTag],
+})
 
 export async function getNowPlaying() {
     const lastFm = new SimpleFM(env.LASTFM_API_KEY)
