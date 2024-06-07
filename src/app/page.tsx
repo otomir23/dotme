@@ -1,15 +1,14 @@
 import ThemeToggle from "@/components/theme-toggle"
 import {
-    AlertTriangle,
-    BriefcaseIcon,
-    LinkIcon,
-    MapPinIcon,
-    MenuIcon,
-    Music4Icon,
-    PenIcon,
-    WrenchIcon,
-    XIcon,
-} from "lucide-react"
+    RiAlertFill,
+    RiBriefcaseFill,
+    RiCloseFill,
+    RiLink,
+    RiMapPin2Fill,
+    RiMenuFill, RiMusic2Fill,
+    RiQuillPenFill,
+    RiToolsFill,
+} from "@remixicon/react"
 import Image from "next/image"
 import avatar from "@/../public/avatar.jpg"
 import Link from "next/link"
@@ -87,19 +86,18 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
             >
                 <label>
                     <input type="checkbox" className="hidden peer" />
-                    <MenuIcon className="sm:hidden cursor-pointer" />
+                    <RiMenuFill className="sm:hidden cursor-pointer" />
                     <nav className="
                         -translate-x-full peer-checked:translate-x-0 flex flex-col sm:flex-row gap-6
                         sm:items-center absolute sm:static sm:translate-x-0 transition-transform
                         bg-white dark:bg-neutral-950 sm:bg-transparent sm:dark:bg-transparent
-                        w-screen sm:w-auto top-0 -left-8 p-8 sm:p-0 h-screen sm:h-auto select-none z-10
-                    "
+                        w-screen sm:w-auto top-0 -left-8 p-8 sm:p-0 h-screen sm:h-auto select-none z-10"
                     >
-                        <XIcon size={32} className="sm:hidden cursor-pointer" key="xmarkicon" />
-                        <NavLink title="Socials" href="#socials" icon={LinkIcon} hamburger />
-                        <NavLink title="Technologies" href="#stack" icon={WrenchIcon} hamburger />
-                        <NavLink title="Portfolio" href="#projects" icon={BriefcaseIcon} hamburger />
-                        <NavLink title="Blog" href="#blog" icon={PenIcon} hamburger />
+                        <RiCloseFill size={32} className="sm:hidden cursor-pointer" key="xmarkicon" />
+                        <NavLink title="Socials" href="#socials" icon={RiLink} hamburger />
+                        <NavLink title="Technologies" href="#stack" icon={RiToolsFill} hamburger />
+                        <NavLink title="Portfolio" href="#projects" icon={RiBriefcaseFill} hamburger />
+                        <NavLink title="Blog" href="#blog" icon={RiQuillPenFill} hamburger />
                     </nav>
                 </label>
                 <ThemeToggle />
@@ -126,14 +124,14 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                 </div>
                 <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-lg mt-4 sm:mt-8">
                     Hi! I’m Damir Modyarov <span className="text-neutral-500"> (@otomir23)</span>.
-                    I live in <MapPinIcon size={16} className="inline" />{" "}
+                    I live in <RiMapPin2Fill size={16} className="inline" />{" "}
                     <span className="font-bold cursor-help" title="Great city!">Moscow, Russia</span> and
                     I am a developer, designer and a very lazy person. I primary specialize in web design and
                     development, but I also sometimes create Minecraft mods or Discord bots.{" "}
                     <StyledLink href="/blog/about-me">More {"-->"}</StyledLink>
                 </p>
             </section>
-            <HomeSection id="socials" title="Socials" icon={LinkIcon}>
+            <HomeSection id="socials" title="Socials" icon={RiLink}>
                 <div className="flex flex-row gap-4 mt-4 sm:mt-8 flex-wrap">
                     {socials.map(social => (
                         <LinkButton
@@ -155,7 +153,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                     ))}
                 </div>
             </HomeSection>
-            <HomeSection id="stack" title="Technologies" icon={WrenchIcon}>
+            <HomeSection id="stack" title="Technologies" icon={RiToolsFill}>
                 <div className="flex flex-col gap-4 mt-4 sm:mt-8">
                     {stack.map(s => (
                         <figure key={s.id}>
@@ -185,7 +183,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                     ))}
                 </div>
             </HomeSection>
-            <HomeSection id="projects" title="Portfolio" icon={BriefcaseIcon}>
+            <HomeSection id="projects" title="Portfolio" icon={RiBriefcaseFill}>
                 <Searchable
                     initialValue={searchParams["project"]}
                     data={projects}
@@ -208,7 +206,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                                 height={20}
                                 className="w-4 h-4 brightness-0 dark:invert"
                             />
-                            <XIcon size={16} />
+                            <RiCloseFill size={16} />
                         </Link>
                     )}
                 >
@@ -250,7 +248,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                     )}
                 </Searchable>
             </HomeSection>
-            <HomeSection id="blog" title="Blog" icon={PenIcon}>
+            <HomeSection id="blog" title="Blog" icon={RiQuillPenFill}>
                 <Searchable
                     initialValue={searchParams["post"]}
                     property="post"
@@ -293,7 +291,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
             >
                 <Anchor id="lastfm" />
                 <h3 className="text-lg font-bold mb-4">
-                    <Music4Icon className="inline mr-2" /> Listening to
+                    <RiMusic2Fill className="inline mr-2" /> Listening to
                 </h3>
                 {nowPlaying ? (
                     <Link
@@ -315,7 +313,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                                 className="w-[174px] h-[174px] rounded-md bg-white dark:bg-neutral-950 flex
                                     items-center justify-center"
                             >
-                                <Music4Icon size={48} className="inline mr-2 text-neutral-500" />
+                                <RiMusic2Fill size={48} className="inline mr-2 text-neutral-500" />
                             </div>
                         )}
                         <figcaption className="sm:py-2">
@@ -337,7 +335,7 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
             </section>
             <noscript>
                 <p className="mt-4 sm:mt-8">
-                    <AlertTriangle className="inline" />{" "}
+                    <RiAlertFill className="inline" />{" "}
                     Hi again! Looks like you have JS disabled. I tried to optimise the website to be usable without
                     scripts, but some things may still be broken. If you find that something is not working right,
                     open an issue or{" "}

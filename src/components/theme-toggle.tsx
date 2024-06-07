@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes"
 import { useEffect, useMemo, useState } from "react"
-import { LucideIcon, SunIcon, MoonIcon } from "lucide-react"
+import { RemixiconComponentType, RiMoonFill, RiSunFill } from "@remixicon/react"
 import { Button } from "@/components/button"
 
 export default function ThemeToggle() {
@@ -13,7 +13,7 @@ export default function ThemeToggle() {
         setThemeIcon(resolvedTheme === "dark")
     }, [resolvedTheme])
 
-    const ThemeIcon = useMemo<LucideIcon>(() => themeIcon ? SunIcon : MoonIcon, [themeIcon])
+    const ThemeIcon = useMemo<RemixiconComponentType>(() => themeIcon ? RiSunFill : RiMoonFill, [themeIcon])
 
     return (
         <Button

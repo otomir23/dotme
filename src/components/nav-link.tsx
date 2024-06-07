@@ -1,10 +1,10 @@
-import { LucideIcon } from "lucide-react"
+import { RemixiconComponentType } from "@remixicon/react"
 import Link from "next/link"
 
 export type NavLinkProps = {
     title: string,
     href: string,
-    icon: LucideIcon,
+    icon: RemixiconComponentType,
     hamburger?: boolean,
 }
 

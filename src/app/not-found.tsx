@@ -1,6 +1,6 @@
 import ErrorBase from "@/components/error-base"
 import StyledLink from "@/components/styled-link"
-import { SearchXIcon } from "lucide-react"
+import { RiFileForbidLine } from "@remixicon/react"
 
 export const metadata = {
     title: "Not found",
@@ -9,7 +9,7 @@ export const metadata = {
 export default function NotFound() {
     return (
         <ErrorBase
-            icon={SearchXIcon}
+            icon={RiFileForbidLine}
             title="Page not found"
         >
             Sorry, but there&apos;s no such page on my website.{" "}

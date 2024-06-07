@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { SearchXIcon } from "lucide-react"
+import { RiCloseCircleFill } from "@remixicon/react"
 import SearchableClient, { SearchableClientProps } from "@/components/searchable-client"
 
 export type SearchableProps<T> = {
@@ -12,13 +12,11 @@ export default function Searchable<T>({ children, data, plural, ...searchProps }
     return (
         <SearchableClient {...searchProps}>
             {
-                data.length > 0
-                    ? data.map(children)
-                    : (
-                        <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                            <SearchXIcon className="inline w-4 h-4" /> Sorry, no {plural} found.
-                        </p>
-                        )
+                data.length > 0 ? data.map(children) : (
+                    <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                        <RiCloseCircleFill className="inline w-4 h-4" /> Sorry, no {plural} found.
+                    </p>
+                )
             }
         </SearchableClient>
     )

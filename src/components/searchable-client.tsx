@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation"
 import { ReactNode, useEffect, useState } from "react"
-import { SearchIcon } from "lucide-react"
+import { RiSearchLine } from "@remixicon/react"
 
 export type SearchableClientProps = {
     initialValue?: string,
@@ -47,7 +47,7 @@ export default function SearchableClient(
                         transition-transform"
                         aria-label={placeholder}
                     >
-                        <SearchIcon size={16} />
+                        <RiSearchLine size={16} />
                     </button>
                 </form>
                 {aside}

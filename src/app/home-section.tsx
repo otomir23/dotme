@@ -1,12 +1,12 @@
 import { ReactNode } from "react"
-import { LucideIcon } from "lucide-react"
+import { RemixiconComponentType } from "@remixicon/react"
 import Anchor from "@/components/anchor"
 
 export type HomeSectionProps = {
     children: ReactNode,
     id: string,
     title: string,
-    icon: LucideIcon,
+    icon: RemixiconComponentType,
 }
 
 export default function HomeSection({ children, title, icon: Icon, id }: HomeSectionProps) {

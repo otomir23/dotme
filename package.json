@@ -11,13 +11,13 @@
     "db:studio": "dotenv -c development -- drizzle-kit studio"
   },
   "dependencies": {
+    "@remixicon/react": "^4.2.0",
     "@solely/simple-fm": "^1.5.3",
     "@t3-oss/env-nextjs": "^0.7.3",
     "@vercel/postgres": "^0.7.2",
     "cva": "^1.0.0-beta.1",
     "date-fns": "^2.30.0",
     "drizzle-orm": "^0.30.2",
-    "lucide-react": "^0.276.0",
     "next": "15.0.0-rc.0",
     "next-themes": "^0.2.1",
     "react": "19.0.0-rc-4c2e457c7c-20240522",

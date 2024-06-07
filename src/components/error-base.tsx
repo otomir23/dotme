@@ -1,16 +1,16 @@
-import { AlertOctagonIcon, LucideIcon } from "lucide-react"
+import { RemixiconComponentType, RiErrorWarningFill } from "@remixicon/react"
 import { ReactNode } from "react"
 import StyledLink from "@/components/styled-link"
 
 export type ErrorBaseProps = {
-    icon?: LucideIcon,
+    icon?: RemixiconComponentType,
     title?: string,
     children?: ReactNode,
 }
 
 export default function ErrorBase(
     {
-        icon: Icon = AlertOctagonIcon,
+        icon: Icon = RiErrorWarningFill,
         title = "Unknown error",
         children: description = (
             <>

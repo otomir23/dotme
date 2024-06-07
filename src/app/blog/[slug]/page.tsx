@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown"
 import Image from "next/image"
 import DatabaseError from "@/components/database-error"
 import NavLink from "@/components/nav-link"
-import { HomeIcon } from "lucide-react"
+import { RiHome2Fill } from "@remixicon/react"
 import remarkGfm from "remark-gfm"
 import remarkToc from "remark-toc"
 import rehypeSlug from "rehype-slug"
@@ -53,7 +53,7 @@ export default async function BlogPost({ params: { slug } }: { params: { slug: s
     return (
         <div>
             <nav className="flex items-center justify-between sticky top-0 pt-8 bg-white dark:bg-neutral-950 pb-4 mb-4">
-                <NavLink title="Home" href="/" icon={HomeIcon} />
+                <NavLink title="Home" href="/" icon={RiHome2Fill} />
                 <ThemeToggle />
             </nav>
             <article className="prose prose-neutral dark:prose-invert prose-img:rounded w-full max-w-none">
