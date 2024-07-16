@@ -14,7 +14,7 @@ export const env = createEnv({
         LASTFM_USERNAME: z.string(),
         UMAMI_SCRIPT_URL: z.string().url().default("https://us.umami.is/script.js"),
         UMAMI_WEBSITE_ID: z.string().uuid().optional(),
-        WEBRING_ID: z.coerce.number().optional(),
+        WEBRING_API_BASE: z.string().url().optional(),
         INVALIDATION_KEY: z.string().optional(),
     },
     client: {},

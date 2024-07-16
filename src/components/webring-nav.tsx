@@ -1,12 +1,8 @@
-import { env } from "@/env.mjs"
 import Link from "next/link"
 import { getWebringSiteData } from "@/data/webring"
 
 export default async function WebringNav() {
-    const webringId = env.WEBRING_ID
-
-    if (webringId === undefined) return null
-    const data = await getWebringSiteData(webringId)
+    const data = await getWebringSiteData()
     if (!data) return null
 
     return (
@@ -17,9 +13,7 @@ export default async function WebringNav() {
             <Link href={data.prev.url}>
                 {`<-- ${data.prev.name}`}
             </Link>
-            <Link href="/webring/">
-                My Webring
-            </Link>
+            Webring
             <Link href={data.next.url}>
                 {`${data.next.name} -->`}
             </Link>

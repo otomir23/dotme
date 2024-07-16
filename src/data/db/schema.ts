@@ -73,9 +73,3 @@ export const blogPosts = pgTable("posts", {
     content: text("content").notNull(),
     unlisted: boolean("unlisted").default(true).notNull(),
 })
-
-export const webringSites = pgTable("webring_sites", {
-    id: serial("id").primaryKey(),
-    name: text("name").notNull(),
-    url: text("url").notNull(),
-})

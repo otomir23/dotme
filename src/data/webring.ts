@@ -1,32 +1,27 @@
-import { db } from "@/data/db"
-import { unstable_cache } from "next/cache"
-import { databaseRevalidationTag, databaseRevalidationTime } from "@/data/index"
+import { env } from "@/env.mjs"
+import { z } from "zod"
 
-export async function getWebringSite(id: number, offset: number) {
-    const sites = await getWholeWebring()
-    const i = sites.findIndex(s => s.id === id)
-    if (i === -1) return null
-    const site = sites.at((i + offset) % sites.length)
-    if (!site) return null
-    return site.url
-}
-
-export async function getWebringSiteData(id: number) {
-    const sites = await getWholeWebring()
-    const i = sites.findIndex(s => s.id === id)
-    if (i === -1) return null
-    return {
-        prev: sites.at((i - 1) % sites.length)!,
-        curr: sites.at(i % sites.length)!,
-        next: sites.at((i + 1) % sites.length)!,
-    }
-}
-
-export const getWholeWebring = unstable_cache(async () => {
-    return db.query.webringSites.findMany({
-        orderBy: (sites, { asc }) => asc(sites.id),
-    })
-}, ["webring"], {
-    revalidate: databaseRevalidationTime,
-    tags: [databaseRevalidationTag],
+const webringSiteSchema = z.object({
+    id: z.number(),
+    name: z.string(),
+    url: z.string().url(),
 })
+
+const webringPointersSchema = z.object({
+    prev: webringSiteSchema,
+    curr: webringSiteSchema,
+    next: webringSiteSchema,
+})
+
+export async function getWebringSiteData() {
+    const base = env.WEBRING_API_BASE
+    if (!base) return null
+
+    const res = await fetch(`${base}/data`).catch(() => null)
+    if (!res?.ok) return null
+
+    const body = await res.json().catch(() => null)
+    const data = webringPointersSchema.safeParse(body)
+    if (!data.success) return null
+    return data.data
+}
