@@ -301,12 +301,12 @@ export default async function Home({ searchParams }: { searchParams: ServerSearc
                         target="_blank"
                     >
                         {nowPlayingCover ? (
-                            <Image
+                            <img
                                 src={nowPlayingCover}
                                 alt={`Album cover of ${nowPlaying.name} by ${nowPlaying.artist.name}`}
                                 width={174}
                                 height={174}
-                                className="rounded-md"
+                                className="rounded-md w-[174px] h-[174px]"
                             />
                         ) : (
                             <div
