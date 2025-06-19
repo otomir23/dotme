@@ -2,7 +2,7 @@ import { env } from "@/env.mjs"
 import { z } from "zod"
 
 const webringSiteSchema = z.object({
-    id: z.number(),
+    slug: z.string(),
     name: z.string(),
     url: z.string().url(),
 })
